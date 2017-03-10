@@ -9,8 +9,9 @@ Once you get to Paris, though, [aside from going gorillas](https://genius.com/12
  you've got to drive around the city to find the clues to solve the crime.
 
 Drive from point to point in the City of Love, solving the Crime of the Century,
-before time runs out! But remember, Drive Slow, Homie! Parisian detectives are no good,
-but their traffic cops are the best around. If you get arrested for speeding, you lose time!
+before time runs out! But remember, [Drive Slow, Homie](https://genius.com/Kanye-west-drive-slow-lyrics)!
+Parisian detectives are no good, but their traffic cops are the best around.
+If you get arrested for speeding, you lose time!
 
 ### Problem Statement:
 Kim has been robbed, and you have to find out who did it!
