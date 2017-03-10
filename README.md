@@ -1,14 +1,14 @@
-#Insert Creative Kanye-Themed Title Here
+#Kanye's In Paris
 ##By Adam Kercheval, Will Mairs, and Avery Spratt (Team 6)
 
 Oh no! You're Kanye west, and you've just learned, mid-world tour, that the love of your life,
-Kim K., has been robbed at gunpoint in Paris! You're (obviously) wildin' the f*ck out (goin' Bobby Boucher,
-one might say), and you decide to hop on a plane to De Gaulle ASAP.
+Kim K., has been robbed at gunpoint in Paris! You're (obviously) wildin' the f*ck out [(goin' Bobby Boucher,
+one might say)](https://genius.com/1781251), and you decide to hop on a plane to De Gaulle A$AP.
 
-Once you get to Paris, though, you've got to drive around the city to find the clues to solve the
-crime.
+Once you get to Paris, though, [aside from going gorillas](https://genius.com/1274259),
+ you've got to drive around the city to find the clues to solve the crime.
 
-You've got to drive from point to point in the City of Love, solving the Crime of the Century,
+Drive from point to point in the City of Love, solving the Crime of the Century,
 before time runs out! But remember, Drive Slow, Homie! Parisian detectives are no good,
 but their traffic cops are the best around. If you get arrested for speeding, you lose time!
 
