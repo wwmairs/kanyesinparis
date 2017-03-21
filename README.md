@@ -45,3 +45,6 @@ from [this song](https://www.youtube.com/watch?v=RxNdSDraYOU).
 ![Home Page](kanye's-in-paris-home.jpg)
 ![Game Screen](Kanye's-in-Paris.jpg)
 ![Clue Page](kanye's-in-paris-louvre.jpg)
+
+#Comments by Ming
+* Total win just on the title *and* the reference to the legendary Bobby Boucher alone.
