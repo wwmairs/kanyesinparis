@@ -1,5 +1,5 @@
-#Kanye's In Paris
-##By Adam Kercheval, Will Mairs, and Avery Spratt (Team 6)
+# Kanye's In Paris
+## By Adam Kercheval, Will Mairs, and Avery Spratt (Team 6)
 
 Oh no! You're Kanye west, and you've just learned, mid-world tour, that the love of your life,
 Kim K., has been robbed at gunpoint in Paris! You're (obviously) wildin' the f*ck out [(goin' Bobby Boucher,
