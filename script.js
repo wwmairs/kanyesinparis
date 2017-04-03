@@ -1,6 +1,6 @@
 x = 0;
 y = 0;
-speed = 5;
+speed = 1;
 angle = 0;
 mod = 0;
 /* TODO: get LEN and HIG to automatically fill the user's screen width and
@@ -11,14 +11,24 @@ HBOUND = HIG + 50;
 LBOUND = LEN + 50;
 
 canvas = document.getElementById("canvas");
+m = document.getElementById("mod");
 context = canvas.getContext("2d");
 car = new Image();
 car.src = "ye1.png";
 
 window.addEventListener("keydown", keypress_handler, false);
 
+// prevents arrow keys from scrolling page, so they can be used for controlling kanye
+window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
 var moveInterval = setInterval(function () {
     draw();
+    m.innerHTML = "<p> Speed: " + mod + "<p>";
 }, 30);
 
 function draw() {
