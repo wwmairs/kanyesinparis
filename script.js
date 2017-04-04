@@ -3,8 +3,13 @@ y = 0;
 speed = 1;
 angle = 0;
 mod = 0;
-/* TODO: get LEN and HIG to automatically fill the user's screen width and
-         height, instead of being hard-coded in */
+limit = 10;
+/* TODO:
+    - get LEN and HIG to automatically fill the user's screen width and
+        height, instead of being hard-coded in
+    - countdown timer
+    - background
+    - clickable buttons on canvas? */
 LEN = 700;
 HIG = 700;
 HBOUND = HIG + 50;
@@ -28,7 +33,7 @@ window.addEventListener("keydown", function(e) {
 
 var moveInterval = setInterval(function () {
     draw();
-    m.innerHTML = "<p> Speed: " + mod + "<p>";
+    m.innerHTML = "<p> Speed: " + mod + " x: " + x + " y: " + y + "<p>";
 }, 30);
 
 function draw() {
@@ -44,8 +49,22 @@ function draw() {
     context.save();
     context.translate(x, y);
 
+    // alerts if Ye is in the purple box
+    if ((50 < x) && (50 < y) && (150 > x) && (150> y)) {
+        alert ("in box!");
+        x = 0;
+        y = 0;
+    }
+
+   // alerts if Ye is speeding
+   if ((mod > limit) || (mod < (limit * -1))) {
+       alert ("Too fast, Ye!");
+       mod = 0;
+   }
+
 /* this allows Ye to wrap around when he goes out of bounds, but has some
    worrying corner cases (try driving him off a corner) */
+
     if (x > LBOUND) {
         x = 0;
         draw();
