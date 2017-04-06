@@ -41,10 +41,13 @@ the up arrow (or 'W', whatever it may be) the car doesn't just move forward - it
 increases.
 A soundtrack for the game (tentatively) will be Kanye saying "drive slow" on a repeating loop
 from [this song](https://www.youtube.com/watch?v=RxNdSDraYOU).
+### Some additional thank-yous:
+#### For canvas color (to determine roads):
+[Stack overflow](http://stackoverflow.com/questions/6735470/get-pixel-color-from-canvas-on-mouseover)!
 
 ![Home Page](kanye's-in-paris-home.jpg)
 ![Game Screen](Kanye's-in-Paris.jpg)
 ![Clue Page](kanye's-in-paris-louvre.jpg)
 
-#Comments by Ming
+# Comments by Ming
 * Total win just on the title *and* the reference to the legendary Bobby Boucher alone.

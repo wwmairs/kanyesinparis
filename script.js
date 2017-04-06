@@ -36,6 +36,13 @@ var moveInterval = setInterval(function () {
     m.innerHTML = "<p> Speed: " + mod + " x: " + x + " y: " + y + "<p>";
 }, 30);
 
+
+function rgbToHex(r, g, b) {
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+}
+
 function draw() {
     context = canvas.getContext("2d");
     context.clearRect(0, 0, LEN, HIG);
@@ -45,6 +52,15 @@ function draw() {
 
     x += (speed * mod) * Math.cos(Math.PI / 180 * angle);
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
+
+
+    var color = context.getImageData(x, y, 1, 1);
+    var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
+    if (hex == "#000000") {
+        console.log("white");
+    } else {
+        console.log("not white");
+    }
 
     context.save();
     context.translate(x, y);
