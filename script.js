@@ -5,15 +5,14 @@ angle = 0;
 mod = 0;
 limit = 10;
 /* TODO:
-    - get LEN and HIG to automatically fill the user's screen width and
+    - get WID and HIG to automatically fill the user's screen width and
         height, instead of being hard-coded in
-    - countdown timer
     - background
     - clickable buttons on canvas? */
-LEN = 700;
+WID = 700;
 HIG = 700;
 HBOUND = HIG + 50;
-LBOUND = LEN + 50;
+LBOUND = WID + 50;
 
 // timer
 var counter = 30;
@@ -31,6 +30,7 @@ canvas = document.getElementById("canvas");
 m = document.getElementById("mod");
 context = canvas.getContext("2d");
 car = new Image();
+
 car.src = "kanyecar.png";
 map = new Image();
 map.scr = "boardmap.jpg";
@@ -58,7 +58,10 @@ function rgbToHex(r, g, b) {
 }
 
 function draw() {
-    context.clearRect(0, 0, LEN, HIG);
+    context = canvas.getContext("2d");
+    context.clearRect(0, 0, WID, HIG);
+
+    context.drawImage(map, 0, 0, WID, HIG);
 
     context.fillStyle = "rgb(200, 100, 220)";
     context.fillRect(50, 50, 100, 100);
@@ -67,7 +70,7 @@ function draw() {
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
 
-/*    var color = context.getImageData(x, y, 1, 1);
+/*    var color = context.getImageData(x, y, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if (hex == "#000000") {
         console.log("white");
