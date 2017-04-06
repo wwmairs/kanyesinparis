@@ -15,6 +15,18 @@ HIG = 700;
 HBOUND = HIG + 50;
 LBOUND = LEN + 50;
 
+// timer
+var counter = 30;
+var interval = setInterval(function() {
+    counter--;
+    timer = document.getElementById("timer");
+    timer.innerHTML = counter;
+    if (counter == 0) {
+        clearInterval(interval);
+        alert("You lost, bummer");
+    }
+}, 1000);
+
 canvas = document.getElementById("canvas");
 m = document.getElementById("mod");
 context = canvas.getContext("2d");
