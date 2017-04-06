@@ -30,10 +30,9 @@ canvas = document.getElementById("canvas");
 m = document.getElementById("mod");
 context = canvas.getContext("2d");
 car = new Image();
-
 car.src = "kanyecar.png";
 map = new Image();
-map.scr = "boardmap.jpg";
+map.src = "boardmap.jpg";
 
 window.addEventListener("keydown", keypress_handler, false);
 
@@ -58,7 +57,7 @@ function rgbToHex(r, g, b) {
 }
 
 function draw() {
-    context = canvas.getContext("2d");
+//    context = canvas.getContext("2d");
     context.clearRect(0, 0, WID, HIG);
 
     context.drawImage(map, 0, 0, WID, HIG);
@@ -76,8 +75,8 @@ function draw() {
         console.log("white");
     } else {
         console.log("not white");
-    }
-*/
+    } */
+
     context.save();
     context.translate(x, y);
 
