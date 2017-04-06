@@ -35,6 +35,7 @@ car.src = "ye1.png";
 map = new Image();
 map.scr = "boardmap.jpg";
 
+
 window.addEventListener("keydown", keypress_handler, false);
 
 // prevents arrow keys from scrolling page, so they can be used for controlling kanye
@@ -50,6 +51,13 @@ var moveInterval = setInterval(function () {
     m.innerHTML = "<p> Speed: " + mod + " x: " + x + " y: " + y + "<p>";
 }, 30);
 
+
+function rgbToHex(r, g, b) {
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+}
+
 function draw() {
     context = canvas.getContext("2d");
     context.clearRect(0, 0, WID, HIG);
@@ -62,6 +70,15 @@ function draw() {
     x += (speed * mod) * Math.cos(Math.PI / 180 * angle);
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
+
+/*    var color = context.getImageData(x, y, 1, 1);
+    var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
+    if (hex == "#000000") {
+        console.log("white");
+    } else {
+        console.log("not white");
+    }
+*/
     context.save();
     context.translate(x, y);
 
