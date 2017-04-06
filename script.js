@@ -7,7 +7,6 @@ limit = 10;
 /* TODO:
     - get LEN and HIG to automatically fill the user's screen width and
         height, instead of being hard-coded in
-    - countdown timer
     - background
     - clickable buttons on canvas? */
 LEN = 700;
@@ -32,7 +31,6 @@ m = document.getElementById("mod");
 context = canvas.getContext("2d");
 car = new Image();
 car.src = "ye1.png";
-car.crossOrigin = "Anonymous";
 
 window.addEventListener("keydown", keypress_handler, false);
 
@@ -66,7 +64,7 @@ function draw() {
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
 
-/*    var color = context.getImageData(x, y, 1, 1);
+/*    var color = context.getImageData(x, y, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if (hex == "#000000") {
         console.log("white");
