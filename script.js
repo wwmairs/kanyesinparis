@@ -9,8 +9,8 @@ limit = 10;
         height, instead of being hard-coded in
     - background
     - clickable buttons on canvas? */
-WID = 700;
-HIG = 700;
+WID = $(window).width();
+HIG = $(window).height();
 HBOUND = HIG + 50;
 LBOUND = WID + 50;
 
@@ -34,6 +34,8 @@ car.src = "kanyecar.png";
 map = new Image();
 map.src = "boardmap.jpg";
 
+canvas.width = WID - 20;
+canvas.height = HIG - 20;
 window.addEventListener("keydown", keypress_handler, false);
 
 // prevents arrow keys from scrolling page, so they can be used for controlling kanye
