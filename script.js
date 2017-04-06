@@ -19,9 +19,8 @@ LBOUND = LEN + 50;
 var counter = 30;
 var interval = setInterval(function() {
     counter--;
-    newMessage = "Time remaining: " ^ counter;
     timer = document.getElementById("timer");
-    timer.innerHTML = newMessage;
+    timer.innerHTML = counter;
     if (counter == 0) {
         clearInterval(interval);
         alert("You lost, bummer");
