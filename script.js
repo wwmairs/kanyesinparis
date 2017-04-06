@@ -31,7 +31,7 @@ canvas = document.getElementById("canvas");
 m = document.getElementById("mod");
 context = canvas.getContext("2d");
 car = new Image();
-car.src = "ye1.png";
+car.src = "kanyecar.png";
 
 window.addEventListener("keydown", keypress_handler, false);
 
