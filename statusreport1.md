@@ -5,3 +5,6 @@ This week our team made a semi-functional game board where Kanye can drive aroun
 The biggest challenge we faced was an unresolved CORS bug trying to accsess the color of the canvas beneath Kanye. This will be used to limit Kanye to only drive on roads. 
 
 Next week our goal is to further develop the style of our gameboard so the speed is presented as a spedometer, solve the CORS bug to implement road behavior and begin introducing destinations on game board. 
+
+#Comments by Ming
+* I think for this project the canvas is fine. Something like Phaser may be overkill
