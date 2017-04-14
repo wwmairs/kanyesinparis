@@ -5,8 +5,7 @@ angle = 0;
 mod = 0;
 limit = 10;
 /* TODO:
-    - get WID and HIG to automatically fill the user's screen width and
-        height, instead of being hard-coded in
+    - make x and y coords reflect car, not ye's head
     - clickable buttons on canvas?
     - store past scores of each user (and overall high score)
     - data reporting at the end of the game */
@@ -23,7 +22,7 @@ var interval = setInterval(function() {
     timer.innerHTML = counter;
     if (counter == 0) {
         clearInterval(interval);
-//        alert("You lost, bummer");
+        alert("You lost, bummer");
     }
 }, 1000);
 
@@ -34,7 +33,7 @@ car = new Image();
 car.src = "https://dl.dropboxusercontent.com/s/n66p9bussx82uo7/kanyecar.png?dl=0";
 car.crossOrigin = "Anonymous";
 map = new Image();
-map.src = "https://dl.dropboxusercontent.com/s/rk8gjbqe5y4yd0u/boardmap.jpg?dl=0";
+map.src = "https://dl.dropboxusercontent.com/s/8ovyemcx0z8mzvx/boardmap.jpg?dl=0";
 map.crossOrigin = "Anonymous";
 spedometer = new Image();
 spedometer.src = "https://dl.dropboxusercontent.com/s/2mhxz7j059kjm1t/spedometer.jpg?dl=0";
@@ -54,7 +53,6 @@ window.addEventListener("keydown", function(e) {
 
 var moveInterval = setInterval(function () {
     draw();
-//    m.innerHTML = "<p> Speed: " + mod + " x: " + x + " y: " + y + "<p>";
 }, 30);
 
 
@@ -91,11 +89,18 @@ function draw() {
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
 
-/*    var color = context.getImageData(x, y, 1, 1).data;
+    // tells whether Ye is off the road, but the coordinates seem to be a bit off -
+    // the x and y that get passed in seem to be somewhere around his forehead, and
+    // it should be near the center of the car
+    // AND, should he go back onto start or onto the road? how would we do that?
+    var color = context.getImageData(x, y, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if ((hex != "#010001") && (hex != "#000000")) {
-        alert ("offroad " + hex);
-    }*/
+        alert ("offroad! go back to start, and minus 10 seconds!");
+        x = 0;
+        y = 0;
+        counter -= 10;
+    }
 
     context.save();
     context.translate(x, y);
