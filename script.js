@@ -16,14 +16,14 @@ HBOUND = HIG + 50;
 LBOUND = WID + 50;
 
 // timer
-var counter = 30;
+var counter = 90;
 var interval = setInterval(function() {
     counter--;
     timer = document.getElementById("timer");
     timer.innerHTML = counter;
     if (counter == 0) {
         clearInterval(interval);
-        alert("You lost, bummer");
+//        alert("You lost, bummer");
     }
 }, 1000);
 
@@ -36,6 +36,9 @@ car.crossOrigin = "Anonymous";
 map = new Image();
 map.src = "https://dl.dropboxusercontent.com/s/rk8gjbqe5y4yd0u/boardmap.jpg?dl=0";
 map.crossOrigin = "Anonymous";
+spedometer = new Image();
+spedometer.src = "https://dl.dropboxusercontent.com/s/2mhxz7j059kjm1t/spedometer.jpg?dl=0";
+spedometer.crossOrigin = "Anonymous";
 
 canvas.width = WID - 20;
 canvas.height = HIG - 20;
@@ -51,7 +54,7 @@ window.addEventListener("keydown", function(e) {
 
 var moveInterval = setInterval(function () {
     draw();
-    m.innerHTML = "<p> Speed: " + mod + " x: " + x + " y: " + y + "<p>";
+//    m.innerHTML = "<p> Speed: " + mod + " x: " + x + " y: " + y + "<p>";
 }, 30);
 
 
@@ -66,35 +69,42 @@ function draw() {
     context.clearRect(0, 0, WID, HIG);
 
     context.drawImage(map, 0, 0, WID, HIG);
+    var displayspeed = mod;
 
-    context.fillStyle = "rgb(200, 100, 220)";
-    context.fillRect(50, 50, 100, 100);
+    // draws spedometer and fills it with speed - this is admittedly a pretty
+    // hacky solution, and is especially risky on particularly small screens
+    if (mod < 0) {
+        displayspeed *= -1;
+    }
+    context.drawImage(spedometer, (8.5 * (WID/10)), (HIG/20));
+    context.font = "80px Impact";
+    if (displayspeed <= (limit * 0.7)) {
+        context.fillStyle = "black";
+    } else if ((displayspeed > (limit * 0.7)) && (displayspeed < limit)) {
+        context.fillStyle = "yellow";
+    } else {
+        context.fillStyle = "red";
+    }
+    context.fillText(displayspeed, (8.95 * (WID/10)), (HIG/6));
 
     x += (speed * mod) * Math.cos(Math.PI / 180 * angle);
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
 
-    var color = context.getImageData(x, y, 1, 1).data;
+/*    var color = context.getImageData(x, y, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    //console.log(hex);
     if ((hex != "#010001") && (hex != "#000000")) {
         alert ("offroad " + hex);
-    }
+    }*/
 
     context.save();
     context.translate(x, y);
 
-    // alerts if Ye is in the purple box
-    if ((50 < x) && (50 < y) && (150 > x) && (150> y)) {
-        alert ("in box!");
-        x = 0;
-        y = 0;
-    }
-
    // alerts if Ye is speeding
    if ((mod > limit) || (mod < (limit * -1))) {
-       alert ("Too fast, Ye!");
+       alert ("Too fast, Ye! Minus 10 seconds!");
        mod = 0;
+       counter -= 10;
    }
 
 /* this allows Ye to wrap around when he goes out of bounds, but has some
