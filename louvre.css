@@ -1,0 +1,74 @@
+body{
+	background-image: url('louvre_clue.jpg');
+	background-repeat:no-repeat;
+	background-size: 100%;
+}
+
+#lisa{
+	position: absolute;
+	margin-left: 40%;
+	margin-top: 2%;
+	margin-right:5%;
+	font-family: helvetica;
+	color: royalblue;
+	font-size: 5vw;
+}
+
+#question{
+	position: absolute;
+	margin-left:23%;
+	margin-top: 45%;
+	margin-right:20%;
+	font-family: helvetica;
+	color: red;
+	font-size: 4vw;
+}
+
+#button_1{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 2vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
+	margin-left: 10%;
+	margin-top: 60%;
+}
+#button_2{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 2vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
+	margin-left: 48%;
+	margin-top: 60%;
+}
+#button_3{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 2vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
+	margin-left: 70%;
+	margin-top: 60%;
+}
+
+a:link{
+	text-decoration: none;
+	color:red;
+}
+a:visited{
+	text-decoration: none;
+	color:white;
+}
