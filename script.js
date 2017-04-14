@@ -7,8 +7,9 @@ limit = 10;
 /* TODO:
     - get WID and HIG to automatically fill the user's screen width and
         height, instead of being hard-coded in
-    - background
-    - clickable buttons on canvas? */
+    - clickable buttons on canvas?
+    - store past scores of each user (and overall high score)
+    - data reporting at the end of the game */
 WID = $(window).width();
 HIG = $(window).height();
 HBOUND = HIG + 50;
@@ -30,9 +31,11 @@ canvas = document.getElementById("canvas");
 m = document.getElementById("mod");
 context = canvas.getContext("2d");
 car = new Image();
-car.src = "kanyecar.png";
+car.src = "https://dl.dropboxusercontent.com/s/n66p9bussx82uo7/kanyecar.png?dl=0";
+car.crossOrigin = "Anonymous";
 map = new Image();
-map.src = "boardmap.jpg";
+map.src = "https://dl.dropboxusercontent.com/s/rk8gjbqe5y4yd0u/boardmap.jpg?dl=0";
+map.crossOrigin = "Anonymous";
 
 canvas.width = WID - 20;
 canvas.height = HIG - 20;
@@ -59,7 +62,7 @@ function rgbToHex(r, g, b) {
 }
 
 function draw() {
-//    context = canvas.getContext("2d");
+    context = canvas.getContext("2d");
     context.clearRect(0, 0, WID, HIG);
 
     context.drawImage(map, 0, 0, WID, HIG);
@@ -71,13 +74,12 @@ function draw() {
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
 
-/*    var color = context.getImageData(x, y, 1, 1).data;
+    var color = context.getImageData(x, y, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    if (hex == "#000000") {
-        console.log("white");
-    } else {
-        console.log("not white");
-    } */
+    //console.log(hex);
+    if ((hex != "#010001") && (hex != "#000000")) {
+        alert ("offroad " + hex);
+    }
 
     context.save();
     context.translate(x, y);
