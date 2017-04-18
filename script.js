@@ -1,12 +1,14 @@
-x = 0;
-y = 0;
+x = 51;
+y = 44;
 speed = 1;
-angle = 0;
+angle = 45;
 mod = 0;
 limit = 10;
 /* TODO:
     - make x and y coords reflect car, not ye's head
     - clickable buttons on canvas?
+    - popups for when rules are broken?
+    - popups for clues?
     - store past scores of each user (and overall high score)
     - data reporting at the end of the game */
 WID = $(window).width();
@@ -15,11 +17,9 @@ HBOUND = HIG + 50;
 LBOUND = WID + 50;
 
 // timer
-var counter = 90;
+var counter = 60;
 var interval = setInterval(function() {
     counter--;
-    timer = document.getElementById("timer");
-    timer.innerHTML = counter;
     if (counter == 0) {
         clearInterval(interval);
         alert("You lost, bummer");
@@ -35,9 +35,6 @@ car.crossOrigin = "Anonymous";
 map = new Image();
 map.src = "https://dl.dropboxusercontent.com/s/8ovyemcx0z8mzvx/boardmap.jpg?dl=0";
 map.crossOrigin = "Anonymous";
-spedometer = new Image();
-spedometer.src = "https://dl.dropboxusercontent.com/s/2mhxz7j059kjm1t/spedometer.jpg?dl=0";
-spedometer.crossOrigin = "Anonymous";
 
 canvas.width = WID - 20;
 canvas.height = HIG - 20;
@@ -74,8 +71,8 @@ function draw() {
     if (mod < 0) {
         displayspeed *= -1;
     }
-    context.drawImage(spedometer, (8.5 * (WID/10)), (HIG/20));
-    context.font = "80px Impact";
+    //context.drawImage(spedometer, (8.5 * (WID/10)), (HIG/20));
+    context.font = "60px Impact";
     if (displayspeed <= (limit * 0.7)) {
         context.fillStyle = "black";
     } else if ((displayspeed > (limit * 0.7)) && (displayspeed < limit)) {
@@ -83,7 +80,9 @@ function draw() {
     } else {
         context.fillStyle = "red";
     }
-    context.fillText(displayspeed, (8.95 * (WID/10)), (HIG/6));
+    context.fillText(displayspeed, (7.8 * (WID/10)), (9.2 * (HIG/10)));
+    context.font = "40px Impact";
+    context.fillText(counter, (8.8 * (WID/10)), (9.65 * (HIG/10)));
 
     x += (speed * mod) * Math.cos(Math.PI / 180 * angle);
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
@@ -93,13 +92,15 @@ function draw() {
     // the x and y that get passed in seem to be somewhere around his forehead, and
     // it should be near the center of the car
     // AND, should he go back onto start or onto the road? how would we do that?
-    var color = context.getImageData(x, y, 1, 1).data;
+    var color = context.getImageData(x, y - 5, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if ((hex != "#010001") && (hex != "#000000")) {
         alert ("offroad! go back to start, and minus 10 seconds!");
-        x = 0;
-        y = 0;
+        x = 51;
+        y = 44;
         counter -= 10;
+        mod = 0;
+        angle = 45;
     }
 
     context.save();
@@ -113,7 +114,9 @@ function draw() {
    }
 
 /* this allows Ye to wrap around when he goes out of bounds, but has some
-   worrying corner cases (try driving him off a corner) */
+   worrying corner cases (try driving him off a corner)
+   TODO: do we want this?
+*/
 
     if (x > LBOUND) {
         x = 0;
@@ -132,7 +135,8 @@ function draw() {
         draw();
     }
     context.rotate(Math.PI / 180 * angle);
-    context.drawImage(car, -(car.width / 2), -(car.height / 2));
+    context.drawImage(car, -(car.width / 2), -(car.height / 1.3));
+
     context.restore();
 }
 
