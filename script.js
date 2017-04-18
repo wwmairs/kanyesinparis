@@ -11,8 +11,8 @@ limit = 10;
     - popups for clues?
     - store past scores of each user (and overall high score)
     - data reporting at the end of the game */
-WID = $(window).width();
-HIG = $(window).height();
+WID = $(window).width() - 10;
+HIG = $(window).height() - 10;
 HBOUND = HIG + 50;
 LBOUND = WID + 50;
 
@@ -61,7 +61,7 @@ function rgbToHex(r, g, b) {
 
 function draw() {
     context = canvas.getContext("2d");
-    context.clearRect(0, 0, WID, HIG);
+    //context.clearRect(0, 0, WID, HIG);
 
     context.drawImage(map, 0, 0, WID, HIG);
     var displayspeed = mod;
@@ -113,27 +113,15 @@ function draw() {
        counter -= 10;
    }
 
-/* this allows Ye to wrap around when he goes out of bounds, but has some
-   worrying corner cases (try driving him off a corner)
-   TODO: do we want this?
-*/
+    if ((x > LBOUND) || (y > HBOUND) || (x < -20) || (y < -50)){
+        alert("Vous avez quitté Paris! Go back to start, and minus 10 seconds!");
+        x = 51;
+        y = 44;
+        counter -= 10;
+        mod = 0;
+        angle = 45;
+    }
 
-    if (x > LBOUND) {
-        x = 0;
-        draw();
-    }
-    if (y > HBOUND) {
-        y = 0;
-        draw();
-    }
-    if (x < -50) {
-        x = LBOUND;
-        draw();
-    }
-    if (y < -50) {
-        y = HBOUND;
-        draw();
-    }
     context.rotate(Math.PI / 180 * angle);
     context.drawImage(car, -(car.width / 2), -(car.height / 1.3));
 
