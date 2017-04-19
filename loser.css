@@ -1,0 +1,28 @@
+body{
+	background-image: url('loser.jpg');
+	background-repeat:no-repeat;
+	background-size: 100%;
+}
+
+#lost{
+	position: absolute;
+	margin-left: 18%;
+	margin-top: 2%;
+	font-family: helvetica;
+	color: royalblue;
+	font-size: 5vw;
+}
+
+#play_again{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 2vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
+	margin-left: 40%;
+	margin-top: 60%;
+}
