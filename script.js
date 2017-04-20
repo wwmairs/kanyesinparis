@@ -5,7 +5,6 @@ angle = 45;
 mod = 0;
 limit = 10;
 /* TODO:
-    - make x and y coords reflect car, not ye's head
     - clickable buttons on canvas?
     - popups for when rules are broken?
     - popups for clues?
@@ -94,7 +93,7 @@ function draw() {
     // AND, should he go back onto start or onto the road? how would we do that?
     var color = context.getImageData(x, y - 5, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    if ((hex != "#010001") && (hex != "#000000")) {
+    if ((hex != "#010001") && (hex != "#000000") && (hex != "#010000")) {
         alert ("offroad! go back to start, and minus 10 seconds!");
         x = 51;
         y = 44;
