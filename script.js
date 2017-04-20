@@ -1,5 +1,9 @@
-x = 51;
-y = 44;
+var startX = 51;
+var startY = 44;
+
+
+x = startX;
+y = startY;
 speed = 1;
 angle = 45;
 mod = 0;
@@ -95,8 +99,8 @@ function draw() {
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if ((hex != "#010001") && (hex != "#000000") && (hex != "#010000")) {
         alert ("offroad! go back to start, and minus 10 seconds!");
-        x = 51;
-        y = 44;
+        x = startX;
+        y = startY;
         counter -= 10;
         mod = 0;
         angle = 45;
@@ -114,8 +118,8 @@ function draw() {
 
     if ((x > LBOUND) || (y > HBOUND) || (x < -20) || (y < -50)){
         alert("Vous avez quitté Paris! Go back to start, and minus 10 seconds!");
-        x = 51;
-        y = 44;
+        x = startX;
+        y = startY;
         counter -= 10;
         mod = 0;
         angle = 45;
