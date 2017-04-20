@@ -135,9 +135,9 @@ function keypress_handler(event) {
         mod -= 1; // slows down every time you press down
     }
     if (event.keyCode == 37) { // left arrow
-        angle -= 5;
+        angle -= 10;
     }
     if (event.keyCode == 39) { // right arrow
-        angle += 5;
+        angle += 10;
     }
 }
