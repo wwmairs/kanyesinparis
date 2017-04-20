@@ -22,7 +22,7 @@ var interval = setInterval(function() {
     counter--;
     if (counter <= 0) {
         clearInterval(interval);
-        alert("You lost, bummer");
+        window.location.replace("loser.html");
     }
 }, 1000);
 
