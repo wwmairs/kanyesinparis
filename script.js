@@ -20,7 +20,7 @@ LBOUND = WID + 50;
 var counter = 60;
 var interval = setInterval(function() {
     counter--;
-    if (counter == 0) {
+    if (counter <= 0) {
         clearInterval(interval);
         alert("You lost, bummer");
     }
