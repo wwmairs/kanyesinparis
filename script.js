@@ -7,7 +7,7 @@ y = startY;
 speed = 1;
 angle = 45;
 mod = 0;
-limit = 10;
+limit = 5;
 /* TODO:
     - clickable buttons on canvas?
     - popups for when rules are broken?
@@ -20,7 +20,7 @@ HBOUND = HIG + 50;
 LBOUND = WID + 50;
 
 // timer
-var counter = 60;
+var counter = 45;
 var interval = setInterval(function() {
     counter--;
     if (counter <= 0) {
@@ -63,6 +63,18 @@ function rgbToHex(r, g, b) {
 }
 
 function draw() {
+
+    if (counter == 40) {
+        var modal = document.getElementById('eiffelModal');
+        modal.style.display = "block";
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+
     context = canvas.getContext("2d");
     //context.clearRect(0, 0, WID, HIG);
 
@@ -98,7 +110,7 @@ function draw() {
     var color = context.getImageData(x, y - 5, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if ((hex != "#010001") && (hex != "#000000") && (hex != "#010000")) {
-        alert ("offroad! go back to start, and minus 10 seconds!");
+        alert ("offroad! go back to start, and minus 10 seconds!" + hex);
         x = startX;
         y = startY;
         counter -= 10;
@@ -145,3 +157,31 @@ function keypress_handler(event) {
         angle += 10;
     }
 }
+
+/* MODALS aka pop-ups down below */
+/*
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}*/
