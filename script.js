@@ -19,8 +19,8 @@ HIG = $(window).height() - 10;
 HBOUND = HIG + 50;
 LBOUND = WID + 50;
 
-// timer
-var counter = 45;
+// Countdown Timer
+var counter = 60;
 var interval = setInterval(function() {
     counter--;
     if (counter <= 0) {
@@ -29,9 +29,14 @@ var interval = setInterval(function() {
     }
 }, 1000);
 
+// Initialize canvas element
 canvas = document.getElementById("canvas");
 m = document.getElementById("mod");
 context = canvas.getContext("2d");
+canvas.width = WID - 20;
+canvas.height = HIG - 20;
+
+// Create and get images for canvas elements
 car = new Image();
 car.src = "https://dl.dropboxusercontent.com/s/n66p9bussx82uo7/kanyecar.png?dl=0";
 car.crossOrigin = "Anonymous";
@@ -39,8 +44,9 @@ map = new Image();
 map.src = "https://dl.dropboxusercontent.com/s/8ovyemcx0z8mzvx/boardmap.jpg?dl=0";
 map.crossOrigin = "Anonymous";
 
-canvas.width = WID - 20;
-canvas.height = HIG - 20;
+
+
+
 window.addEventListener("keydown", keypress_handler, false);
 
 // prevents arrow keys from scrolling page, so they can be used for controlling kanye
@@ -51,17 +57,19 @@ window.addEventListener("keydown", function(e) {
     }
 }, false);
 
+// Board is redrawn every 30 miliseconds
 var moveInterval = setInterval(function () {
     draw();
 }, 30);
 
-
+// Helper for determining when Kanye is offroading
 function rgbToHex(r, g, b) {
     if (r > 255 || g > 255 || b > 255)
         throw "Invalid color component";
     return ((r << 16) | (g << 8) | b).toString(16);
 }
 
+// Main draw loop
 function draw() {
 
     if (counter == 40) {
@@ -103,10 +111,13 @@ function draw() {
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
 
-    // tells whether Ye is off the road, but the coordinates seem to be a bit off -
-    // the x and y that get passed in seem to be somewhere around his forehead, and
+    // tells whether Ye is off the road, but the coordinates seem to be a bit
+    // off -
+    // the x and y that get passed in seem to be somewhere around his
+    // forehead, and
     // it should be near the center of the car
-    // AND, should he go back onto start or onto the road? how would we do that?
+    // AND, should he go back onto start or onto the road? how would we do
+    // that?
     var color = context.getImageData(x, y - 5, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if ((hex != "#010001") && (hex != "#000000") && (hex != "#010000")) {
