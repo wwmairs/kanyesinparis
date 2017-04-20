@@ -21,10 +21,8 @@ body {
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
     width: 80%;
 }
 
@@ -34,4 +32,90 @@ body {
     float: right;
     font-size: 28px;
     font-weight: bold;
+}
+/* eiffel tower popup styles */
+#eiffelModal{
+    margin: auto;
+    padding: 10px;
+	background-image: url('eiffel_clue.jpg');
+	background-repeat:no-repeat;
+    background-position: center;
+	background-size: 50%;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#harold{
+	position: relative;
+	margin-left: 45%;
+	margin-top: 10%;
+	margin-right:20%;
+	font-family: helvetica;
+	color: royalblue;
+	font-size: 2.4vw;
+}
+
+#question{
+	position: absolute;
+	margin-left:20%;
+    margin-right:30%;
+	margin-top: 2%;
+	font-family: helvetica;
+	color: red;
+	font-size: 1.8vw;
+}
+
+#button_1{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 1.3vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
+	margin-left: 20%;
+	margin-top: 35%;
+}
+#button_2{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 1.3vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
+	margin-left: 33%;
+	margin-top: 35%;
+}
+#button_3{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 1.3vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
+	margin-left: 50%;
+	margin-top: 35%;
+}
+
+a:link{
+	text-decoration: none;
+	color:red;
+}
+a:visited{
+	text-decoration: none;
+	color:white;
 }

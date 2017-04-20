@@ -20,12 +20,12 @@ HBOUND = HIG + 50;
 LBOUND = WID + 50;
 
 // Countdown Timer
-var counter = 60;
+var counter = 45;
 var interval = setInterval(function() {
     counter--;
     if (counter <= 0) {
         clearInterval(interval);
-        window.location.replace("loser.html");
+        //window.location.replace("loser.html");
     }
 }, 1000);
 
@@ -72,7 +72,7 @@ function rgbToHex(r, g, b) {
 // Main draw loop
 function draw() {
 
-    if (counter == 40) {
+    if (counter == 44) {
         var modal = document.getElementById('eiffelModal');
         modal.style.display = "block";
         // When the user clicks anywhere outside of the modal, close it
@@ -120,8 +120,8 @@ function draw() {
     // that?
     var color = context.getImageData(x, y - 5, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    if ((hex != "#010001") && (hex != "#000000") && (hex != "#010000")) {
-        alert ("offroad! go back to start, and minus 10 seconds!" + hex);
+    if ((hex != "#010001") && (hex != "#000000") && (hex != "#010000") && (hex != "#d80000")) {
+        alert ("offroad! go back to start, and minus 10 seconds!");
         x = startX;
         y = startY;
         counter -= 10;
