@@ -1,0 +1,29 @@
+body{
+	background-image: url('winner.jpg');
+	background-repeat:no-repeat;
+	background-size: 100%;
+	width: 100%;
+}
+
+#won{
+	position: absolute;
+	margin-left: 26%;
+	margin-top: -1%;
+	font-family: helvetica;
+	color: royalblue;
+	font-size: 4vw;
+}
+
+#play_again{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 2vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
+	margin-left: 40%;
+	margin-top: 62%;
+}
