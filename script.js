@@ -9,7 +9,6 @@ angle = 45;
 mod = 0;
 limit = 10;
 /* TODO:
-    - make x and y coords reflect car, not ye's head
     - clickable buttons on canvas?
     - popups for when rules are broken?
     - popups for clues?
@@ -109,7 +108,7 @@ function draw() {
     // that?
     var color = context.getImageData(x, y - 5, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    if ((hex != "#010001") && (hex != "#000000")) {
+    if ((hex != "#010001") && (hex != "#000000") && (hex != "#010000")) {
         alert ("offroad! go back to start, and minus 10 seconds!");
         x = startX;
         y = startY;
@@ -151,9 +150,9 @@ function keypress_handler(event) {
         mod -= 1; // slows down every time you press down
     }
     if (event.keyCode == 37) { // left arrow
-        angle -= 5;
+        angle -= 10;
     }
     if (event.keyCode == 39) { // right arrow
-        angle += 5;
+        angle += 10;
     }
 }
