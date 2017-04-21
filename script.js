@@ -106,6 +106,7 @@ function draw() {
         var modal = document.getElementById('eiffelModal');
         modal.style.display = "block";
         mod = 0;
+        // I'm worried that this replacement of Kanye doesn't work on small screens
         x = 354;
         y = 598;
         angle = 15;

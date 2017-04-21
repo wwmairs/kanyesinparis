@@ -1,28 +1,38 @@
 body{
+	height:100%;
+    width:100%;
+	background-size: cover;
 	background-image: url('loser.jpg');
 	background-repeat:no-repeat;
-	background-size: 100%;
+	/*background-size: 100%;*/
 }
 
 #lost{
-	position: absolute;
+	font-family: helvetica;
+	color: royalblue;
+	font-size: 4vw;
+	margin: auto;
+	margin-top: 8%;
+	width: 79.8%;
+/*	position: absolute;
 	margin-left: 18%;
 	margin-top: 2%;
 	font-family: helvetica;
 	color: royalblue;
-	font-size: 5vw;
+	font-size: 5vw; */
 }
 
 #play_again{
-	padding:15px 25px;
+	padding: 15px 25px;
 	background-color: royalblue;
 	font-family: helvetica;
 	font-size: 2vw;
-	text-align:center;
-	font-weight:bold;
+	text-align: center;
+	font-weight: bold;
 	text-transform: uppercase;
 	color: red;
-	position: absolute;
-	margin-left: 40%;
-	margin-top: 60%;
+	width: 15%;
+	margin: auto;
+	margin-top: 47%;
+
 }
