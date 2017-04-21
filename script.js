@@ -6,6 +6,7 @@ speed = 1;
 angle = 45;
 mod = 0;
 limit = 5;
+counter_pause = false;
 /* TODO:
     - Modals for: success, broken rules, start and finish
     - store past scores of each user (and overall high score)
@@ -29,7 +30,11 @@ BEY   = [1023/1600, 1144/1600, 621/804, 656/804];
 // Countdown Timer
 var counter = 45;
 var interval = setInterval(function() {
-    counter--;
+    if (counter_pause) {
+        // do nothing
+    } else {
+        counter--;
+    }
     if (counter <= 0) {
         clearInterval(interval);
         /* commented this out for testing */
@@ -105,6 +110,7 @@ function draw() {
         y = 598;
         angle = 15;
         places_visited.eiffel = true;
+        counter_pause = true;
 
         function MousePos(event) {
             tempx = event.clientX;
@@ -116,6 +122,7 @@ function draw() {
             } else if (in_box (BEY, tempx, tempy)) {
                 /* TODO success modal here */
                 modal.style.display = "none";
+                counter_pause = false;
             }
         }
         modal.addEventListener("click", MousePos);
@@ -143,6 +150,7 @@ function draw() {
     }
     context.fillText(displayspeed, (7.8 * (WID/10)), (9.2 * (HIG/10)));
     context.font = "40px Impact";
+    context.fillStyle = "black";
     context.fillText(counter, (8.8 * (WID/10)), (9.65 * (HIG/10)));
 
     x += (speed * mod) * Math.cos(Math.PI / 180 * angle);
