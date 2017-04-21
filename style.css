@@ -5,3 +5,136 @@
 body {
   margin: 10px;
 }
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+/* eiffel tower popup styles */
+#eiffelModal{
+    margin: auto;
+    padding: 10px;
+	background-image: url('eiffel_clue.jpeg');
+	background-repeat:no-repeat;
+    background-position: center;
+	background-size: 50%;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* louvre popup styles */
+#louvreModal{
+    margin: auto;
+    padding: 10px;
+	background-image: url('louvre_clue.jpg');
+	background-repeat:no-repeat;
+    background-position: center;
+	background-size: 50%;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#lisa{
+	position: absolute;
+	margin-left: 45%;
+	margin-top: 10%;
+	margin-right:20%;
+	font-family: helvetica;
+	color: royalblue;
+	font-size: 2.4vw;
+}
+
+/* general modal styles */
+#question{
+	position: fixed;
+	margin-left:20%;
+    margin-right:30%;
+	margin-top: 2%;
+	font-family: helvetica;
+	color: red;
+	font-size: 1.8vw;
+}
+
+#button_1{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 1.3vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: fixed;
+	margin-left: 20%;
+	margin-top: 35%;
+}
+#button_2{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 1.3vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: fixed;
+	margin-left: 33%;
+	margin-top: 35%;
+}
+#button_3{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 1.3vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: fixed;
+	margin-left: 50%;
+	margin-top: 35%;
+}
+
+a:link{
+	text-decoration: none;
+	color:red;
+}
+a:visited{
+	text-decoration: none;
+	color:white;
+}
