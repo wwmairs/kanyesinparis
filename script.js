@@ -1,5 +1,9 @@
 var startX = 51;
 var startY = 44;
+
+var adjust = 23;
+
+
 x = startX;
 y = startY;
 speed = 1;
@@ -160,6 +164,11 @@ function draw() {
 
     // tells whether Ye is off the road, but the coordinates seem to be a bit
     // off -
+    // the x and y that get passed in seem to be somewhere around his 
+    // forehead, (the middle of the car is ~ 23 pixels below his forehead) and
+    // it should be near the center of the car
+    // AND, should he go back onto start or onto the road? how would we do 
+    // that?
     // the x and y that get passed in seem to be somewhere around his
     // forehead, and
     // it should be near the center of the car
@@ -197,6 +206,16 @@ function draw() {
     context.drawImage(car, -(car.width / 2), -(car.height / 1.3));
 
     context.restore();
+}
+
+
+    // y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
+function correctX() {
+    Math.cos(angle) * adjust;
+}
+
+function correctY() {
+    Math.sin(angle) * adjust;
 }
 
 function keypress_handler(event) {
