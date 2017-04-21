@@ -1,6 +1,8 @@
 var startX = 51;
 var startY = 44;
 
+var adjust = 23;
+
 
 x = startX;
 y = startY;
@@ -169,7 +171,7 @@ function draw() {
     // the x and y that get passed in seem to be somewhere around his
     // forehead, and
     // it should be near the center of the car
-    var color = context.getImageData(x, y, 1, 1).data;
+    var color = context.getImageData(correctX(), correctY(), 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if ((hex == "#00d558") || (hex == "#3e00d3")) {
         alert ("offroad! go back to start, and minus 10 seconds!");
