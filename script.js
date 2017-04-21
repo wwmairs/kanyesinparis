@@ -1,7 +1,5 @@
 var startX = 51;
 var startY = 44;
-
-
 x = startX;
 y = startY;
 speed = 1;
@@ -9,9 +7,7 @@ angle = 45;
 mod = 0;
 limit = 5;
 /* TODO:
-    - clickable buttons on canvas?
-    - popups for when rules are broken?
-    - popups for clues?
+    - Modals for: success, broken rules, start and finish
     - store past scores of each user (and overall high score)
     - data reporting at the end of the game */
 WID = $(window).width() - 10;
@@ -19,12 +15,24 @@ HIG = $(window).height() - 10;
 HBOUND = HIG + 50;
 LBOUND = WID + 50;
 
+places_visited = {"eiffel":false, "louvre":false, "moulin":false};
+
+/* boundaries for in_box and at_stop functions
+   format: [left x bound, right x bound, top y bound, bottom y bound] */
+
+EIFFEL = [190, 305, 539, 585]
+
+JAYZ  = [504/1600, 584/1600, 621/804, 656/804];
+SWIFT = [717/1600, 883/1600, 621/804, 656/804];
+BEY   = [1023/1600, 1144/1600, 621/804, 656/804];
+
 // Countdown Timer
 var counter = 45;
 var interval = setInterval(function() {
     counter--;
     if (counter <= 0) {
         clearInterval(interval);
+        /* commented this out for testing */
         //window.location.replace("loser.html");
     }
 }, 1000);
@@ -43,7 +51,6 @@ car.crossOrigin = "Anonymous";
 map = new Image();
 map.src = "https://dl.dropboxusercontent.com/s/8ovyemcx0z8mzvx/boardmap.jpg?dl=0";
 map.crossOrigin = "Anonymous";
-
 
 
 
@@ -69,18 +76,49 @@ function rgbToHex(r, g, b) {
     return ((r << 16) | (g << 8) | b).toString(16);
 }
 
+function in_box (box, x1, y1) {
+    var relx = x1 / (document.body.clientWidth);
+    var rely = y1 / (document.body.clientHeight);
+    if ((relx >= box[0]) && (relx <= box[1]) && (rely >= box[2]) && rely <= box[3]) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function at_stop (location, x1, y1) {
+    if ((x1 >= location[0]) && (x1 <= location[1]) && (y1 >= location[2]) && (y1 <= location[3])) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // Main draw loop
 function draw() {
 
-    if (counter == 44) {
+    if ((at_stop (EIFFEL, x, y)) && (places_visited.eiffel == false)) {
         var modal = document.getElementById('eiffelModal');
         modal.style.display = "block";
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
+        mod = 0;
+        x = 354;
+        y = 598;
+        angle = 15;
+        places_visited.eiffel = true;
+
+        function MousePos(event) {
+            tempx = event.clientX;
+            tempy = event.clientY;
+            if (in_box (JAYZ, tempx, tempy)) {
+                window.location.replace("loser.html");
+            } else if (in_box (SWIFT, tempx, tempy)) {
+                window.location.replace("loser.html");
+            } else if (in_box (BEY, tempx, tempy)) {
+                /* TODO success modal here */
                 modal.style.display = "none";
             }
         }
+        modal.addEventListener("click", MousePos);
     }
 
     context = canvas.getContext("2d");
@@ -116,11 +154,9 @@ function draw() {
     // the x and y that get passed in seem to be somewhere around his
     // forehead, and
     // it should be near the center of the car
-    // AND, should he go back onto start or onto the road? how would we do
-    // that?
-    var color = context.getImageData(x, y - 5, 1, 1).data;
+    var color = context.getImageData(x, y, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    if ((hex != "#010001") && (hex != "#000000") && (hex != "#010000") && (hex != "#d80000")) {
+    if ((hex == "#00d558") || (hex == "#3e00d3")) {
         alert ("offroad! go back to start, and minus 10 seconds!");
         x = startX;
         y = startY;
@@ -168,31 +204,3 @@ function keypress_handler(event) {
         angle += 10;
     }
 }
-
-/* MODALS aka pop-ups down below */
-/*
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}*/
