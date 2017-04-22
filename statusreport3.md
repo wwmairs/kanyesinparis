@@ -1,6 +1,6 @@
 ## Group 6, Status Report 3
 This past week we began implementing gameplay by creating destinations for 
-Kanye to drive too.  Locations are represented as areas of the canvas.  When 
+Kanye to drive to.  Locations are represented as areas of the canvas.  When 
 Kanye arrives, the page will redirect to the new pages (louvre.html, 
 eiffel.html, and moulinrouge.html) containing Ye-related trivia; correct 
 answers return the player to the game page and incorrect answers show losing 
