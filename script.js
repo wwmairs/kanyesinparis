@@ -17,7 +17,7 @@ BEY   = [1023/1600, 1144/1600, 621/804, 656/804];
 x = startX;
 y = startY;
 // setting start X, Y coords, eiffle, louvre, moulin
-updateSessionData(x, y, false, false, false);
+initializeSessionData();
 
 speed = 1;
 angle = 45;
@@ -76,33 +76,7 @@ window.addEventListener("keydown", function(e) {
     }
 }, false);
 
-function updateSessionData(newX, newY, newEiffle, newLouvre, newMoulin) {
-    sessionStorage.setItem('x', newX);
-    sessionStorage.setItem('y', newY);
-    sessionStorage.setItem('eiffle', newEiffle);
-    sessionStorage.setItem('louvre', newLouvre);
-    sessionStorage.setItem('moulin', newMoulin);
-}
 
-function getX () {
-    sessionStorage.getItem('x');
-}
-
-function getY () {
-    sessionStorage.getItem('y');
-}
-
-function getEiffle () {
-    sessionStorage.getItem('eiffle');
-}
-
-function getLouvre () {
-    sessionStorage.getItem('louvre');
-}
-
-function getMoulin () {
-    sessionStorage.getItem('moulin');
-}
 
 // Board is redrawn every 30 miliseconds
 var moveInterval = setInterval(function () {
@@ -142,10 +116,10 @@ function draw() {
         modal.style.display = "block";
         mod = 0;
         // I'm worried that this replacement of Kanye doesn't work on small screens
-        x = 354;
-        y = 598;
+        setX(354);
+        setY(598);
         angle = 15;
-        places_visited.eiffel = true;
+        setEiffle(true);
         counter_pause = true;
 
         function MousePos(event) {
@@ -262,4 +236,52 @@ function keypress_handler(event) {
     if (event.keyCode == 39) { // right arrow
         angle += 10;
     }
+}
+
+function initializeSessionData () {
+    sessionStorage.setItem('x', startX);
+    sessionStorage.setItem('y', startY);
+    sessionStorage.setItem('eiffle', false);
+    sessionStorage.setItem('louvre', false);
+    sessionStorage.setItem('moulin', false);
+}
+
+function getX () {
+    sessionStorage.getItem('x');
+}
+
+function getY () {
+    sessionStorage.getItem('y');
+}
+
+function getEiffle () {
+    sessionStorage.getItem('eiffle');
+}
+
+function getLouvre () {
+    sessionStorage.getItem('louvre');
+}
+
+function getMoulin () {
+    sessionStorage.getItem('moulin');
+}
+
+function setX (newX) {
+    sessionStorage.setItem('x', newX);
+}
+
+function setY (newY) {
+    sessionStorage.setItem('y', newY);
+}
+
+function setEiffle (newEiffle) {
+    sessionStorage.setItem('eiffle', newEiffle);
+}
+
+function setLouvre (newLouvre) {
+    sessionStorage.setItem('louvre', newLouvre);
+}
+
+function setMoulin (newMoulin) {
+    sessionStorage.setItem('moulin', newMoulin);
 }
