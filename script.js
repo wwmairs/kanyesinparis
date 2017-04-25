@@ -1,11 +1,24 @@
+
+// globals
 var startX = 51;
 var startY = 44;
 
-var adjust = 23;
+/* boundaries for in_box and at_stop functions
+   format: [left x bound, right x bound, top y bound, bottom y bound] */
+EIFFEL = [190, 305, 539, 585]
 
+JAYZ  = [504/1600, 584/1600, 621/804, 656/804];
+SWIFT = [717/1600, 883/1600, 621/804, 656/804];
+BEY   = [1023/1600, 1144/1600, 621/804, 656/804];
 
+// var adjust = 23;
+
+// Starting values
 x = startX;
 y = startY;
+// setting start X, Y coords, eiffle, louvre, moulin
+updateSessionData(x, y, false, false, false);
+
 speed = 1;
 angle = 45;
 mod = 0;
@@ -20,16 +33,6 @@ HIG = $(window).height() - 10;
 HBOUND = HIG + 50;
 LBOUND = WID + 50;
 
-places_visited = {"eiffel":false, "louvre":false, "moulin":false};
-
-/* boundaries for in_box and at_stop functions
-   format: [left x bound, right x bound, top y bound, bottom y bound] */
-
-EIFFEL = [190, 305, 539, 585]
-
-JAYZ  = [504/1600, 584/1600, 621/804, 656/804];
-SWIFT = [717/1600, 883/1600, 621/804, 656/804];
-BEY   = [1023/1600, 1144/1600, 621/804, 656/804];
 
 // Countdown Timer
 var counter = 45;
@@ -73,6 +76,34 @@ window.addEventListener("keydown", function(e) {
     }
 }, false);
 
+function updateSessionData(newX, newY, newEiffle, newLouvre, newMoulin) {
+    sessionStorage.setItem('x', newX);
+    sessionStorage.setItem('y', newY);
+    sessionStorage.setItem('eiffle', newEiffle);
+    sessionStorage.setItem('louvre', newLouvre);
+    sessionStorage.setItem('moulin', newMoulin);
+}
+
+function getX () {
+    sessionStorage.getItem('x');
+}
+
+function getY () {
+    sessionStorage.getItem('y');
+}
+
+function getEiffle () {
+    sessionStorage.getItem('eiffle');
+}
+
+function getLouvre () {
+    sessionStorage.getItem('louvre');
+}
+
+function getMoulin () {
+    sessionStorage.getItem('moulin');
+}
+
 // Board is redrawn every 30 miliseconds
 var moveInterval = setInterval(function () {
     draw();
@@ -106,7 +137,7 @@ function at_stop (location, x1, y1) {
 // Main draw loop
 function draw() {
 
-    if ((at_stop (EIFFEL, x, y)) && (places_visited.eiffel == false)) {
+    if ((at_stop (EIFFEL, x, y)) && (getEiffel == false)) {
         var modal = document.getElementById('eiffelModal');
         modal.style.display = "block";
         mod = 0;
@@ -210,13 +241,13 @@ function draw() {
 
 
     // y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
-function correctX() {
-    Math.cos(angle) * adjust;
-}
+// function correctX(x) {
+//     x + Math.cos(angle) * adjust;
+// }
 
-function correctY() {
-    Math.sin(angle) * adjust;
-}
+// function correctY(y) {
+//     y + Math.sin(angle) * adjust;
+// }
 
 function keypress_handler(event) {
     if (event.keyCode == 38) { // up arrow
