@@ -10,3 +10,6 @@ Next we will use session data and persistent data storage to implement the
 'scavanger-hunt' aspect of gameplay and a leaderboard.  We missed the mark
 on aesthetic development, although we did learn how to display and update
 text on the canvas for countdown and speedometer.  
+
+# Comments by Ming
+* "We missed the mark on aesthetic development" --whatever.  What we saw looked great.
