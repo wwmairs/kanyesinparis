@@ -4,7 +4,6 @@ body{
 	background-size: cover;
 	background-image: url('loser.jpg');
 	background-repeat:no-repeat;
-	/*background-size: 100%;*/
 }
 
 #lost{
@@ -14,12 +13,6 @@ body{
 	margin: auto;
 	margin-top: 8%;
 	width: 79.8%;
-/*	position: absolute;
-	margin-left: 18%;
-	margin-top: 2%;
-	font-family: helvetica;
-	color: royalblue;
-	font-size: 5vw; */
 }
 
 #play_again{

@@ -5,7 +5,10 @@ var startY = 44;
 
 /* boundaries for in_box and at_stop functions
    format: [left x bound, right x bound, top y bound, bottom y bound] */
-EIFFEL = [190, 305, 539, 585]
+EIFFEL = [190, 305, 539, 585];
+MOULIN = [740, 800, 0, 150];
+LOUVRE = [1370, 1510, 370, 250];
+HOTEL  = [400, 450, 730, 775];
 
 JAYZ  = [504/1600, 584/1600, 621/804, 656/804];
 SWIFT = [717/1600, 883/1600, 621/804, 656/804];
@@ -167,25 +170,22 @@ function draw() {
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
 
-    // tells whether Ye is off the road, but the coordinates seem to be a bit
-    // off -
-    // the x and y that get passed in seem to be somewhere around his 
-    // forehead, (the middle of the car is ~ 23 pixels below his forehead) and
-    // it should be near the center of the car
-    // AND, should he go back onto start or onto the road? how would we do 
-    // that?
-    // the x and y that get passed in seem to be somewhere around his
-    // forehead, and
-    // it should be near the center of the car
+    // tells whether Ye is off the road
     var color = context.getImageData(x, y, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if ((hex == "#00d558") || (hex == "#3e00d3")) {
-        alert ("offroad! go back to start, and minus 10 seconds!");
+        var modal = document.getElementById('off_road');
+        modal.style.display = "block";
+        counter_pause = true;
         x = startX;
         y = startY;
-        counter -= 10;
+        counter -= 5;
         mod = 0;
         angle = 45;
+        window.onclick = function(event) {
+            modal.style.display = "none";
+            counter_pause = false;
+        }
     }
 
     context.save();
@@ -193,18 +193,29 @@ function draw() {
 
    // alerts if Ye is speeding
    if ((mod > limit) || (mod < (limit * -1))) {
-       alert ("Too fast, Ye! Minus 10 seconds!");
+       var modal = document.getElementById('too_fast');
+       modal.style.display = "block";
+       counter_pause = true;
+       counter -= 5;
        mod = 0;
-       counter -= 10;
+       window.onclick = function(event) {
+           modal.style.display = "none";
+           counter_pause = false;
+       }
    }
 
     if ((x > LBOUND) || (y > HBOUND) || (x < -20) || (y < -50)){
-        alert("Vous avez quitté Paris! Go back to start, and minus 10 seconds!");
+        var modal = document.getElementById('left_paris');
+        modal.style.display = "block";
+        counter_pause = true;
         x = startX;
         y = startY;
-        counter -= 10;
-        mod = 0;
         angle = 45;
+        mod = 0;
+        window.onclick = function(event) {
+            modal.style.display = "none";
+            counter_pause = false;
+        }
     }
 
     context.rotate(Math.PI / 180 * angle);
