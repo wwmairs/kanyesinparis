@@ -61,11 +61,13 @@ canvas.height = HIG - 20;
 
 // Create and get images for canvas elements
 car = new Image();
-car.src = "https://dl.dropboxusercontent.com/s/n66p9bussx82uo7/kanyecar.png?dl=0";
 car.crossOrigin = "Anonymous";
+car.src = "https://dl.dropboxusercontent.com/s/n66p9bussx82uo7/kanyecar.png?dl=0";
+
 map = new Image();
-map.src = "https://dl.dropboxusercontent.com/s/8ovyemcx0z8mzvx/boardmap.jpg?dl=0";
 map.crossOrigin = "Anonymous";
+map.src = "https://dl.dropboxusercontent.com/s/8ovyemcx0z8mzvx/boardmap.jpg?dl=0";
+
 
 
 
@@ -172,6 +174,8 @@ function draw() {
 
     // tells whether Ye is off the road
     var color = context.getImageData(x, y, 1, 1).data;
+    console.log('just got the color');
+    console.log(color);
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     if ((hex == "#00d558") || (hex == "#3e00d3")) {
         var modal = document.getElementById('off_road');
