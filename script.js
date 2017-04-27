@@ -174,10 +174,11 @@ function draw() {
 
     // tells whether Ye is off the road
     var color = context.getImageData(x, y, 1, 1).data;
-    console.log('just got the color');
-    console.log(color);
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    if ((hex == "#00d558") || (hex == "#3e00d3")) {
+    console.log('hex values:');
+    console.log(hex);
+    if ((hex == "#56c261") || (hex == "#153bcb")) {
+        console.log('Kanyes is offroading!');
         var modal = document.getElementById('off_road');
         modal.style.display = "block";
         counter_pause = true;
