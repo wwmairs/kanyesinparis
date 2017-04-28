@@ -10,12 +10,6 @@ MOULIN = [740, 800, 0, 150];
 LOUVRE = [1370, 1510, 370, 250];
 HOTEL  = [400, 450, 730, 775];
 
-JAYZ  = [504/1600, 584/1600, 621/804, 656/804];
-SWIFT = [717/1600, 883/1600, 621/804, 656/804];
-BEY   = [1023/1600, 1144/1600, 621/804, 656/804];
-
-// var adjust = 23;
-
 // Starting values
 x = startX;
 y = startY;
@@ -81,8 +75,6 @@ window.addEventListener("keydown", function(e) {
     }
 }, false);
 
-
-
 // Board is redrawn every 30 miliseconds
 var moveInterval = setInterval(function () {
     draw();
@@ -93,16 +85,6 @@ function rgbToHex(r, g, b) {
     if (r > 255 || g > 255 || b > 255)
         throw "Invalid color component";
     return ((r << 16) | (g << 8) | b).toString(16);
-}
-
-function in_box (box, x1, y1) {
-    var relx = x1 / (document.body.clientWidth);
-    var rely = y1 / (document.body.clientHeight);
-    if ((relx >= box[0]) && (relx <= box[1]) && (rely >= box[2]) && rely <= box[3]) {
-        return true;
-    } else {
-        return false;
-    }
 }
 
 function at_stop (location, x1, y1) {
@@ -116,18 +98,22 @@ function at_stop (location, x1, y1) {
 // Main draw loop
 function draw() {
 
-    if ((at_stop (EIFFEL, x, y)) && (getEiffel == false)) {
-        var modal = document.getElementById('eiffelModal');
-        modal.style.display = "block";
-        mod = 0;
-        // I'm worried that this replacement of Kanye doesn't work on small screens
-        setX(354);
-        setY(598);
-        angle = 15;
-        setEiffle(true);
-        counter_pause = true;
+    if ((at_stop (EIFFEL, x, y)) && (getEiffel() == "false")) {
+        window.location.replace("eiffel.html");
 
-        function MousePos(event) {
+        setEiffel(true);
+        counter_pause = true;
+        // This is all old stuff from releasing modals when Kanye reaches eiffel tower -
+        // it's not necessary anymore, but I kept it in for now just because some
+        // functions might be reusable
+    /*        var modal = document.getElementById('eiffelModal');
+            modal.style.display = "block";
+            mod = 0;
+            // I'm worried that this replacement of Kanye doesn't work on small screens
+            setX(354);
+            setY(598);
+            angle = 15;
+           function MousePos(event) {
             tempx = event.clientX;
             tempy = event.clientY;
             if (in_box (JAYZ, tempx, tempy)) {
@@ -135,16 +121,15 @@ function draw() {
             } else if (in_box (SWIFT, tempx, tempy)) {
                 window.location.replace("loser.html");
             } else if (in_box (BEY, tempx, tempy)) {
-                /* TODO success modal here */
                 modal.style.display = "none";
                 counter_pause = false;
             }
         }
-        modal.addEventListener("click", MousePos);
+        modal.addEventListener("click", MousePos); */
     }
 
     context = canvas.getContext("2d");
-    //context.clearRect(0, 0, WID, HIG);
+    context.clearRect(0, 0, WID, HIG);
 
     context.drawImage(map, 0, 0, WID, HIG);
     var displayspeed = mod;
@@ -177,7 +162,8 @@ function draw() {
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     console.log('hex values:');
     console.log(hex);
-    if ((hex == "#56c261") || (hex == "#153bcb")) {
+    var offroadvals = ["#51c45c", "#0f33ce", "#51c45c", "#0f33ce", "#00d558", "#3e00d3"];
+    if (offroadvals.indexOf(hex) != -1) {
         console.log('Kanyes is offroading!');
         var modal = document.getElementById('off_road');
         modal.style.display = "block";
@@ -230,15 +216,6 @@ function draw() {
 }
 
 
-    // y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
-// function correctX(x) {
-//     x + Math.cos(angle) * adjust;
-// }
-
-// function correctY(y) {
-//     y + Math.sin(angle) * adjust;
-// }
-
 function keypress_handler(event) {
     if (event.keyCode == 38) { // up arrow
         mod += 1; // speeds up every time you press up
@@ -257,47 +234,47 @@ function keypress_handler(event) {
 function initializeSessionData () {
     sessionStorage.setItem('x', startX);
     sessionStorage.setItem('y', startY);
-    sessionStorage.setItem('eiffle', false);
+    sessionStorage.setItem('eiffel', false);
     sessionStorage.setItem('louvre', false);
     sessionStorage.setItem('moulin', false);
 }
 
 function getX () {
-    sessionStorage.getItem('x');
+    return sessionStorage.getItem('x');
 }
 
 function getY () {
-    sessionStorage.getItem('y');
+    return sessionStorage.getItem('y');
 }
 
-function getEiffle () {
-    sessionStorage.getItem('eiffle');
+function getEiffel () {
+    return sessionStorage.getItem('eiffel');
 }
 
 function getLouvre () {
-    sessionStorage.getItem('louvre');
+    return sessionStorage.getItem('louvre');
 }
 
 function getMoulin () {
-    sessionStorage.getItem('moulin');
+    return sessionStorage.getItem('moulin');
 }
 
 function setX (newX) {
-    sessionStorage.setItem('x', newX);
+    return sessionStorage.setItem('x', newX);
 }
 
 function setY (newY) {
-    sessionStorage.setItem('y', newY);
+    return sessionStorage.setItem('y', newY);
 }
 
-function setEiffle (newEiffle) {
-    sessionStorage.setItem('eiffle', newEiffle);
+function setEiffel (newEiffel) {
+    return sessionStorage.setItem('eiffel', newEiffel);
 }
 
 function setLouvre (newLouvre) {
-    sessionStorage.setItem('louvre', newLouvre);
+    return sessionStorage.setItem('louvre', newLouvre);
 }
 
 function setMoulin (newMoulin) {
-    sessionStorage.setItem('moulin', newMoulin);
+    return sessionStorage.setItem('moulin', newMoulin);
 }
