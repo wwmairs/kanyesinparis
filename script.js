@@ -177,7 +177,7 @@ function draw() {
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     console.log('hex values:');
     console.log(hex);
-    if ((hex == "#56c261") || (hex == "#153bcb")) {
+    if ((hex == "#51c45c") || (hex == "#0f33ce")) {
         console.log('Kanyes is offroading!');
         var modal = document.getElementById('off_road');
         modal.style.display = "block";
