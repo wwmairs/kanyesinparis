@@ -3,6 +3,17 @@
 var startX = 51;
 var startY = 44;
 
+// TODO: someone who knows jokes about kanye 
+// west should write better directions
+var directions = ["Allez à la Tour Eiffel!!", "Allez au Moulin Rouge!",
+                  "Cherchez au Louvre!", "Rentrez à l'hotel!"];
+var destination = {
+    EIFFEL : 0,
+    MOULIN : 1,
+    LOUVRE : 2,
+    HOTEL  : 3
+};
+
 /* boundaries for in_box and at_stop functions
    format: [left x bound, right x bound, top y bound, bottom y bound] */
 EIFFEL = [190, 305, 539, 585];
@@ -13,7 +24,7 @@ HOTEL  = [400, 450, 730, 775];
 // Starting values
 x = startX;
 y = startY;
-// setting start X, Y coords, eiffle, louvre, moulin
+// setting start X, Y coords, eiffle, louvre, moulin, directions
 initializeSessionData();
 
 speed = 1;
@@ -98,6 +109,8 @@ function at_stop (location, x1, y1) {
 // Main draw loop
 function draw() {
 
+    console.log("Coordinates:" + x + ", " + y);
+    console.log("")
     if ((at_stop (EIFFEL, x, y)) && (getEiffel() == "false")) {
         window.location.replace("eiffel.html");
 
@@ -158,56 +171,16 @@ function draw() {
 
 
     // tells whether Ye is off the road
-    var color = context.getImageData(x, y, 1, 1).data;
-    var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    console.log('hex values:');
-    console.log(hex);
-    var offroadvals = ["#51c45c", "#0f33ce", "#51c45c", "#0f33ce", "#00d558", "#3e00d3"];
-    if (offroadvals.indexOf(hex) != -1) {
-        console.log('Kanyes is offroading!');
-        var modal = document.getElementById('off_road');
-        modal.style.display = "block";
-        counter_pause = true;
-        x = startX;
-        y = startY;
-        counter -= 5;
-        mod = 0;
-        angle = 45;
-        window.onclick = function(event) {
-            modal.style.display = "none";
-            counter_pause = false;
-        }
-    }
+    offRoading();
 
     context.save();
     context.translate(x, y);
 
-   // alerts if Ye is speeding
-   if ((mod > limit) || (mod < (limit * -1))) {
-       var modal = document.getElementById('too_fast');
-       modal.style.display = "block";
-       counter_pause = true;
-       counter -= 5;
-       mod = 0;
-       window.onclick = function(event) {
-           modal.style.display = "none";
-           counter_pause = false;
-       }
-   }
+    // alerts if Ye is speeding
+    speeding();
 
-    if ((x > LBOUND) || (y > HBOUND) || (x < -20) || (y < -50)){
-        var modal = document.getElementById('left_paris');
-        modal.style.display = "block";
-        counter_pause = true;
-        x = startX;
-        y = startY;
-        angle = 45;
-        mod = 0;
-        window.onclick = function(event) {
-            modal.style.display = "none";
-            counter_pause = false;
-        }
-    }
+    // alerts is Ye left Paris
+    leftParis();
 
     context.rotate(Math.PI / 180 * angle);
     context.drawImage(car, -(car.width / 2), -(car.height / 1.3));
@@ -231,50 +204,105 @@ function keypress_handler(event) {
     }
 }
 
+///////////////////////////////////////////////////////////
+///// HELPER FUNCTIONS for draw() loop                /////
+///////////////////////////////////////////////////////////
+
+
+// Checking that Kanye is on road, displays modal, 
+// changes time, resets x y coords
+///////////////////////////////////////////////////////////
+function offRoading() {
+    var color = context.getImageData(x, y, 1, 1).data;
+    var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
+    console.log('hex values:');
+    console.log(hex);
+    var offroadvals = ["#51c45c", "#0f33ce", "#51c45c", "#0f33ce", "#00d558", "#3e00d3"];
+    if (offroadvals.indexOf(hex) != -1) {
+        console.log('Kanyes is offroading!');
+        var modal = document.getElementById('off_road');
+        modal.style.display = "block";
+        counter_pause = true;
+        x = startX;
+        y = startY;
+        counter -= 5;
+        mod = 0;
+        angle = 45;
+        window.onclick = function(event) {
+            modal.style.display = "none";
+            counter_pause = false;
+        }
+    }
+}
+
+// Checking if Kanye is speeding, displays modal and stuff
+///////////////////////////////////////////////////////////
+function speeding() {
+   if ((mod > limit) || (mod < (limit * -1))) {
+       var modal = document.getElementById('too_fast');
+       modal.style.display = "block";
+       counter_pause = true;
+       counter -= 5;
+       mod = 0;
+       window.onclick = function(event) {
+           modal.style.display = "none";
+           counter_pause = false;
+       }
+   }
+}
+
+// Checking if Kanye a quitté Paris, displays modal and stuff
+///////////////////////////////////////////////////////////
+function leftParis() {
+    if ((x > LBOUND) || (y > HBOUND) || (x < -20) || (y < -50)){
+        var modal = document.getElementById('left_paris');
+        modal.style.display = "block";
+        counter_pause = true;
+        x = startX;
+        y = startY;
+        angle = 45;
+        mod = 0;
+        window.onclick = function(event) {
+            modal.style.display = "none";
+            counter_pause = false;
+        }
+    }
+}
+
+
+///////////////////////////////////////////////////////////
+///// HELPER FUNCTIONS for session data               /////
+///////////////////////////////////////////////////////////
 function initializeSessionData () {
     sessionStorage.setItem('x', startX);
     sessionStorage.setItem('y', startY);
     sessionStorage.setItem('eiffel', false);
     sessionStorage.setItem('louvre', false);
     sessionStorage.setItem('moulin', false);
+    sessionStorage.setItem('direct', directions[destination.EIFFEL]);
 }
 
-function getX () {
-    return sessionStorage.getItem('x');
-}
+// getters and setters
+///////////////////////////////////////////////////////////
+function getX () {return sessionStorage.getItem('x');}
 
-function getY () {
-    return sessionStorage.getItem('y');
-}
+function getY () {return sessionStorage.getItem('y');}
 
-function getEiffel () {
-    return sessionStorage.getItem('eiffel');
-}
+function getEiffel () {return sessionStorage.getItem('eiffel');}
 
-function getLouvre () {
-    return sessionStorage.getItem('louvre');
-}
+function getLouvre () {return sessionStorage.getItem('louvre');}
 
-function getMoulin () {
-    return sessionStorage.getItem('moulin');
-}
+function getMoulin () {return sessionStorage.getItem('moulin');}
 
-function setX (newX) {
-    return sessionStorage.setItem('x', newX);
-}
+function setX (newX) {return sessionStorage.setItem('x', newX);}
 
-function setY (newY) {
-    return sessionStorage.setItem('y', newY);
-}
+function setY (newY) {return sessionStorage.setItem('y', newY);}
 
 function setEiffel (newEiffel) {
-    return sessionStorage.setItem('eiffel', newEiffel);
-}
+    return sessionStorage.setItem('eiffel', newEiffel);}
 
 function setLouvre (newLouvre) {
-    return sessionStorage.setItem('louvre', newLouvre);
-}
+    return sessionStorage.setItem('louvre', newLouvre);}
 
 function setMoulin (newMoulin) {
-    return sessionStorage.setItem('moulin', newMoulin);
-}
+    return sessionStorage.setItem('moulin', newMoulin);}
