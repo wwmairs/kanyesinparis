@@ -108,38 +108,8 @@ function at_stop (location, x1, y1) {
 
 // Main draw loop
 function draw() {
-
-    console.log("Coordinates:" + x + ", " + y);
-    console.log("")
-    if ((at_stop (EIFFEL, x, y)) && (getEiffel() == "false")) {
-        window.location.replace("eiffel.html");
-
-        setEiffel(true);
-        counter_pause = true;
-        // This is all old stuff from releasing modals when Kanye reaches eiffel tower -
-        // it's not necessary anymore, but I kept it in for now just because some
-        // functions might be reusable
-    /*        var modal = document.getElementById('eiffelModal');
-            modal.style.display = "block";
-            mod = 0;
-            // I'm worried that this replacement of Kanye doesn't work on small screens
-            setX(354);
-            setY(598);
-            angle = 15;
-           function MousePos(event) {
-            tempx = event.clientX;
-            tempy = event.clientY;
-            if (in_box (JAYZ, tempx, tempy)) {
-                window.location.replace("loser.html");
-            } else if (in_box (SWIFT, tempx, tempy)) {
-                window.location.replace("loser.html");
-            } else if (in_box (BEY, tempx, tempy)) {
-                modal.style.display = "none";
-                counter_pause = false;
-            }
-        }
-        modal.addEventListener("click", MousePos); */
-    }
+    
+    checkDestinations();
 
     context = canvas.getContext("2d");
     context.clearRect(0, 0, WID, HIG);
@@ -170,7 +140,7 @@ function draw() {
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
 
-    // tells whether Ye is off the road
+    // alerts if Ye is off the road
     offRoading();
 
     context.save();
@@ -203,6 +173,81 @@ function keypress_handler(event) {
         angle += 10;
     }
 }
+///////////////////////////////////////////////////////////
+///// Funcitons for checking if at destinations       /////
+///////////////////////////////////////////////////////////
+function checkDestinations() {
+    // for some reason this doesn't work, but it should, and
+    // would be pretty helpful
+    // if (!getEiffel()) {checkEiffel();}
+    // if (! getMoulin()) {checkMoulin();}
+    // if (! getLouvre()) {checkLouvre();}
+    // if (! getHotel())  {checkHotel();}
+    checkEiffel();
+    checkMoulin();
+    checkLouvre();
+    checkHotel();
+
+}
+
+function checkEiffel() {
+    if (at_stop(EIFFEL, x, y)) {
+        window.location.replace("eiffel.html");
+
+        setEiffel(true);
+        counter_pause = true;
+        // This is all old stuff from releasing modals when Kanye reaches eiffel tower -
+        // it's not necessary anymore, but I kept it in for now just because some
+        // functions might be reusable
+    /*        var modal = document.getElementById('eiffelModal');
+            modal.style.display = "block";
+            mod = 0;
+            // I'm worried that this replacement of Kanye doesn't work on small screens
+            setX(354);
+            setY(598);
+            angle = 15;
+           function MousePos(event) {
+            tempx = event.clientX;
+            tempy = event.clientY;
+            if (in_box (JAYZ, tempx, tempy)) {
+                window.location.replace("loser.html");
+            } else if (in_box (SWIFT, tempx, tempy)) {
+                window.location.replace("loser.html");
+            } else if (in_box (BEY, tempx, tempy)) {
+                modal.style.display = "none";
+                counter_pause = false;
+            }
+        }
+        modal.addEventListener("click", MousePos); */
+    }
+}
+
+function checkMoulin() {
+    if (at_stop (MOULIN, x, y)) {
+        window.location.replace("moulin.html");
+
+        setMoulin(true);
+        counter_pause = true;
+    }
+}
+
+function checkLouvre() {
+    if (at_stop (LOUVRE, x, y)) {
+        window.location.replace("louvre.html");
+
+        setLouvre(true);
+        counter_pause = true;
+    }
+}
+
+function checkHotel() {
+    if (at_stop (HOTEL, x, y)) {
+        window.location.replace("hotel.html");
+
+        setHotel(true);
+        counter_pause = true;
+    }
+}
 
 ///////////////////////////////////////////////////////////
 ///// HELPER FUNCTIONS for draw() loop                /////
@@ -215,9 +260,11 @@ function keypress_handler(event) {
 function offRoading() {
     var color = context.getImageData(x, y, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    console.log('hex values:');
-    console.log(hex);
-    var offroadvals = ["#51c45c", "#0f33ce", "#51c45c", "#0f33ce", "#00d558", "#3e00d3"];
+    // console.log('hex values:');
+    // console.log(hex);
+    var offroadvals = ["#51c45c", "#0f33ce", 
+                       "#51c45c", "#0f33ce", 
+                       "#00d558", "#3e00d3"];
     if (offroadvals.indexOf(hex) != -1) {
         console.log('Kanyes is offroading!');
         var modal = document.getElementById('off_road');
@@ -279,6 +326,7 @@ function initializeSessionData () {
     sessionStorage.setItem('eiffel', false);
     sessionStorage.setItem('louvre', false);
     sessionStorage.setItem('moulin', false);
+    sessionStorage.setItem('hotel',  false);
     sessionStorage.setItem('direct', directions[destination.EIFFEL]);
 }
 
@@ -294,6 +342,8 @@ function getLouvre () {return sessionStorage.getItem('louvre');}
 
 function getMoulin () {return sessionStorage.getItem('moulin');}
 
+function getHotel () {return sessionStorage.getItem('hotel');}
+
 function setX (newX) {return sessionStorage.setItem('x', newX);}
 
 function setY (newY) {return sessionStorage.setItem('y', newY);}
@@ -306,3 +356,6 @@ function setLouvre (newLouvre) {
 
 function setMoulin (newMoulin) {
     return sessionStorage.setItem('moulin', newMoulin);}
+
+function setHotel (newHotel) {
+    return sessionStorage.setItem('hotel', newHotel);}
