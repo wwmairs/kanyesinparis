@@ -26,6 +26,7 @@ x = startX;
 y = startY;
 // setting start X, Y coords, eiffle, louvre, moulin, directions
 initializeSessionData();
+showDirections();
 
 speed = 1;
 angle = 45;
@@ -183,6 +184,10 @@ function checkDestinations() {
     // if (! getMoulin()) {checkMoulin();}
     // if (! getLouvre()) {checkLouvre();}
     // if (! getHotel())  {checkHotel();}
+    // TODO: Work out why only checkEiffel works
+    // TODO: figure out how to query the bool too
+    // for some reason trying to && with ! getEiffel
+    // or && with (getEiffel() == false) breaks it
     checkEiffel();
     checkMoulin();
     checkLouvre();
@@ -195,6 +200,7 @@ function checkEiffel() {
         window.location.replace("eiffel.html");
 
         setEiffel(true);
+        setDirect(directions[destinations.MOULIN]);
         counter_pause = true;
         // This is all old stuff from releasing modals when Kanye reaches eiffel tower -
         // it's not necessary anymore, but I kept it in for now just because some
@@ -234,7 +240,6 @@ function checkMoulin() {
 function checkLouvre() {
     if (at_stop (LOUVRE, x, y)) {
         window.location.replace("louvre.html");
-
         setLouvre(true);
         counter_pause = true;
     }
@@ -247,6 +252,21 @@ function checkHotel() {
         setHotel(true);
         counter_pause = true;
     }
+}
+
+///////////////////////////////////////////////////////////
+///// HELPER FUNCTIONS for displaying directions      /////
+///////////////////////////////////////////////////////////
+function showDirections() {
+
+    var modal = document.getElementById('destination');
+        document.getElementById("direction").innerHTML = getDirect();
+        modal.style.display = "block";
+        counter_pause = true;
+        window.onclick = function(event) {
+            modal.style.display = "none";
+            counter_pause = false;
+        }
 }
 
 ///////////////////////////////////////////////////////////
@@ -344,18 +364,18 @@ function getMoulin () {return sessionStorage.getItem('moulin');}
 
 function getHotel () {return sessionStorage.getItem('hotel');}
 
-function setX (newX) {return sessionStorage.setItem('x', newX);}
+function getDirect () {return sessionStorage.getItem('direct');}
 
-function setY (newY) {return sessionStorage.setItem('y', newY);}
+function setX (newX) {sessionStorage.setItem('x', newX);}
 
-function setEiffel (newEiffel) {
-    return sessionStorage.setItem('eiffel', newEiffel);}
+function setY (newY) {sessionStorage.setItem('y', newY);}
 
-function setLouvre (newLouvre) {
-    return sessionStorage.setItem('louvre', newLouvre);}
+function setEiffel (newEiffel) {sessionStorage.setItem('eiffel', newEiffel);}
 
-function setMoulin (newMoulin) {
-    return sessionStorage.setItem('moulin', newMoulin);}
+function setLouvre (newLouvre) {sessionStorage.setItem('louvre', newLouvre);}
 
-function setHotel (newHotel) {
-    return sessionStorage.setItem('hotel', newHotel);}
+function setMoulin (newMoulin) {sessionStorage.setItem('moulin', newMoulin);}
+
+function setHotel (newHotel) {sessionStorage.setItem('hotel', newHotel);}
+
+function setDirect (newDirect) {sessionStorage.setItem('direct', newDirect);}
