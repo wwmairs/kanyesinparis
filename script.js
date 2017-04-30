@@ -1,29 +1,30 @@
+// General TODOs
+/*
+    - store past scores of each user (and overall high score)
+    - data reporting at the end of the game 
+*/
 
-// globals
-var startX = 51;
-var startY = 44;
+
+// Global constants
+const START_X = 51;
+const START_Y = 44;
 
 // TODO: someone who knows jokes about kanye
 // west should write better directions
-var directions = ["Go to the Eiffel Tower!", 
+const DIRECTIONS = ["Go to the Eiffel Tower!", 
                   "Go to the Moulin Rouge!",
                   "Go to the Louvre!", 
                   "Go back to the Hotel!"];
-var destEnum = {
-    EIFFEL : 0,
-    MOULIN : 1,
-    LOUVRE : 2,
-    HOTEL  : 3
-};
 
-/* boundaries for in_box and at_stop functions
-   format: [left x bound, right x bound, top y bound, bottom y bound] */
+const destEnum = {EIFFEL : 0, MOULIN : 1, LOUVRE : 2, HOTEL  : 3};
+
+// Boundaries for in_box and at_stop functions
+// [left x bound, right x bound, top y bound, bottom y bound]
 // THESE ARE ALL RATIOS NOW, of x coord / WID and y coord / HIG
-EIFFEL = [.117, .232, .656, .760];
-MOULIN = [.460, .535, .085, .160];
-LOUVRE = [.876, .964, .360, .444];
-HOTEL  = [.254, .330, .870, .998];
-
+const EIFFEL = [.117, .232, .656, .760];
+const MOULIN = [.460, .535, .085, .160];
+const LOUVRE = [.876, .964, .360, .444];
+const HOTEL  = [.254, .330, .870, .998];
 
 // setting start X, Y coords, eiffel, louvre, moulin, directions
 // only initializes if a game is not currently in progress
@@ -33,17 +34,13 @@ showDirections();
 // Starting values
 x = getX();
 y = getY();
-
 speed = 1;
 angle = 45;
 mod = 0;
 limit = 5;
 // Game starts paused; unpauses when player clicks directions modal
 counter_pause = true;
-/* TODO:
-    - Modals for: success, broken rules, start and finish
-    - store past scores of each user (and overall high score)
-    - data reporting at the end of the game */
+
 WID = $(window).width() - 10;
 HIG = $(window).height() - 10;
 HBOUND = HIG + 50;
@@ -74,7 +71,6 @@ canvas.height = HIG - 20;
 
 loadImages();
 
-
 // prevents arrow keys from scrolling page, so they can be used 
 // for controlling kanye
 window.addEventListener("keydown", function(e) {
@@ -89,26 +85,15 @@ var moveInterval = setInterval(function () {
     draw();
 }, 30);
 
-// Helper for determining when Kanye is offroading
-function rgbToHex(r, g, b) {
-    if (r > 255 || g > 255 || b > 255)
-        throw "Invalid color component";
-    return ((r << 16) | (g << 8) | b).toString(16);
-}
-
-function at_stop (location, x1, y1) {
-    if ((x1/WID >= location[0]) && (x1/WID <= location[1]) && 
-        (y1/HIG >= location[2]) && (y1/HIG <= location[3])) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 // Main draw loop
 function draw() {
-
+    // Checks and respons appropriately if Kanye is at a
+    // destination offroading, speeding, or has left Paris
     checkDestinations();
+    offRoading();
+    speeding();
+    leftParis();
 
     context = canvas.getContext("2d");
     context.clearRect(0, 0, WID, HIG);
@@ -138,18 +123,8 @@ function draw() {
     x += (speed * mod) * Math.cos(Math.PI / 180 * angle);
     y += (speed * mod) * Math.sin(Math.PI / 180 * angle);
 
-
-    // alerts if Ye is off the road
-    offRoading();
-
     context.save();
     context.translate(x, y);
-
-    // alerts if Ye is speeding
-    speeding();
-
-    // alerts is Ye left Paris
-    leftParis();
 
     context.rotate(Math.PI / 180 * angle);
     context.drawImage(car, -(car.width / 2), -(car.height / 1.3));
@@ -165,6 +140,11 @@ function draw() {
 // something WILD: sessionStorage seems to convert boolean
 // values false and true into string "false" and "true"
 // what a weird language feature
+// It does this same thing to floats too... why?
+
+// Checks if Kanye is at the correct location, following
+// a set order: Eiffel -> Moulin -> Louvre -> Hotel
+///////////////////////////////////////////////////////////
 function checkDestinations() {
     if (getEiffel() == "false"){
         checkEiffel();
@@ -216,6 +196,18 @@ function checkHotel() {
     }
 }
 
+// Returns true if x1 and y1 are within the block 
+// represented by location
+///////////////////////////////////////////////////////////
+function at_stop (location, x1, y1) {
+    if ((x1/WID >= location[0]) && (x1/WID <= location[1]) && 
+        (y1/HIG >= location[2]) && (y1/HIG <= location[3])) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ///////////////////////////////////////////////////////////
 ///// HELPER FUNCTIONS for displaying directions      /////
 ///////////////////////////////////////////////////////////
@@ -223,7 +215,7 @@ function showDirections() {
 
     var modal = document.getElementById('destination');
         document.getElementById("direction").innerHTML 
-                = directions[getDirect()];
+                = DIRECTIONS[getDirect()];
         modal.style.display = "block";
         counter_pause = true;
         window.onclick = function(event) {
@@ -298,6 +290,14 @@ function leftParis() {
     }
 }
 
+// Helper for determining when Kanye is offroading
+///////////////////////////////////////////////////////////
+function rgbToHex(r, g, b) {
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+}
+
 // Using arrow-key input to move Kanye
 ///////////////////////////////////////////////////////////
 function keypress_handler(event) {
@@ -335,8 +335,8 @@ function loadImages() {
 function initializeSessionData () {
     if (sessionStorage.getItem('gameStarted') == null) {
         sessionStorage.setItem('gameStarted', true);
-        sessionStorage.setItem('x', startX);
-        sessionStorage.setItem('y', startY);
+        sessionStorage.setItem('x', START_X);
+        sessionStorage.setItem('y', START_Y);
         sessionStorage.setItem('eiffel', false);
         sessionStorage.setItem('louvre', false);
         sessionStorage.setItem('moulin', false);
