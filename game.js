@@ -52,6 +52,7 @@ showDirections();
 // Starting values
 x = getX();
 y = getY();
+counter = getCounter();
 speed = 1;
 angle = 45;
 mod = 0;
@@ -66,7 +67,7 @@ LBOUND = WID + 50;
 
 
 // Countdown Timer
-var counter = 45;
+//var counter = 45;
 var interval = setInterval(function() {
     if (counter_pause) {
         // do nothing
@@ -108,16 +109,18 @@ var moveInterval = setInterval(function () {
 // Main draw loop
 function draw() {
     // Checks and responds appropriately if Kanye is at a
-    // destination, offroading, speeding, or has left Paris
+    // destination, speeding, or has left Paris
     checkDestinations();
-    offRoading();
     speeding();
     leftParis();
 
     context = canvas.getContext("2d");
     context.clearRect(0, 0, WID, HIG);
-
     context.drawImage(map, 0, 0, WID, HIG);
+    // Checks if Ye is off the road - has to be executed after map has been drawn
+    // on canvas, but before car has been drawn
+    offRoading();
+
     var displayspeed = mod;
 
     // draws spedometer and fills it with speed - this is admittedly a pretty
@@ -183,6 +186,7 @@ function checkEiffel() {
     if (at_stop(EIFFEL, x, y)) {
         setX(x);
         setY(y);
+        setCounter(counter);
         window.location.replace("eiffel.html");
         counter_pause = true;
     }
@@ -192,6 +196,7 @@ function checkMoulin() {
     if (at_stop (MOULIN, x, y)) {
         setX(x);
         setY(y);
+        setCounter(counter);
         window.location.replace("moulinrouge.html");
         counter_pause = true;
     }
@@ -201,6 +206,7 @@ function checkLouvre() {
     if (at_stop (LOUVRE, x, y)) {
         setX(x);
         setY(y);
+        setCounter(counter);
         window.location.replace("louvre.html");
         counter_pause = true;
     }
@@ -284,6 +290,7 @@ function offRoading() {
     var offroadvals = ["#51c45c", "#0f33ce",
                        "#51c45c", "#0f33ce",
                        "#00d558", "#3e00d3"];
+    console.log(hex);
     if (offroadvals.indexOf(hex) != -1) {
         var modal = document.getElementById('off_road');
         modal.style.display = "block";
