@@ -1,23 +1,41 @@
+///////////////////////////////////////////////////////////////////////////////
+/////                               game.js                               /////
+/////          javascript code used to implement the gameplay of          /////
+/////                                                                     /////
+/////                           Kanye's In Paris™                         /////
+/////                      a game of skill and trivia                     /////
+/////                                                                     /////
+/////                                  by                                 /////
+/////           Avery Spratt, Adam Kercheval, and William Mairs           /////
+///////////////////////////////////////////////////////////////////////////////
+
 // General TODOs
 /*
     - store past scores of each user (and overall high score)
     - data reporting at the end of the game 
+    - someone with better Kanye-related joke writing abilities 
+      should come up with some clever directions for the DIRECTIONS
+      array (~line 25)
+    - MAKE KANYE STAY ON THE ROAD
+      he can still drive wherever he pleases
 */
 
+// General notes
+/* 
+    - something WILD: sessionStorage seems to convert boolean
+      values false and true into string "false" and "true"
+      what a weird language feature
+      It does this same thing to floats too... why?
+*/
 
 // Global constants
 const START_X = 51;
 const START_Y = 44;
-
-// TODO: someone who knows jokes about kanye
-// west should write better directions
-const DIRECTIONS = ["Go to the Eiffel Tower!", 
-                  "Go to the Moulin Rouge!",
-                  "Go to the Louvre!", 
-                  "Go back to the Hotel!"];
-
 const destEnum = {EIFFEL : 0, MOULIN : 1, LOUVRE : 2, HOTEL  : 3};
-
+const DIRECTIONS = ["Go to the Eiffel Tower!", 
+                    "Go to the Moulin Rouge!",
+                    "Go to the Louvre!", 
+                    "Go back to the Hotel!"];
 // Boundaries for in_box and at_stop functions
 // [left x bound, right x bound, top y bound, bottom y bound]
 // THESE ARE ALL RATIOS NOW, of x coord / WID and y coord / HIG
@@ -69,6 +87,7 @@ context = canvas.getContext("2d");
 canvas.width = WID - 20;
 canvas.height = HIG - 20;
 
+// load car and map images
 loadImages();
 
 // prevents arrow keys from scrolling page, so they can be used 
@@ -88,8 +107,8 @@ var moveInterval = setInterval(function () {
 
 // Main draw loop
 function draw() {
-    // Checks and respons appropriately if Kanye is at a
-    // destination offroading, speeding, or has left Paris
+    // Checks and responds appropriately if Kanye is at a
+    // destination, offroading, speeding, or has left Paris
     checkDestinations();
     offRoading();
     speeding();
@@ -132,15 +151,13 @@ function draw() {
     context.restore();
 }
 
-
+///////////////////////////////////////////////////////////////////////////////
+/////                       Land of the helpers                           /////
+///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////
-///// Funcitons for checking if at destinations       /////
+///// Functions for checking if at destinations       /////
 ///////////////////////////////////////////////////////////
-// something WILD: sessionStorage seems to convert boolean
-// values false and true into string "false" and "true"
-// what a weird language feature
-// It does this same thing to floats too... why?
 
 // Checks if Kanye is at the correct location, following
 // a set order: Eiffel -> Moulin -> Louvre -> Hotel
