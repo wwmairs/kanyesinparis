@@ -206,7 +206,6 @@ function checkEiffel() {
         window.location.replace("eiffel.html");
 
         setEiffel(true);
-        setDirect(destEnum.MOULIN);
         counter_pause = true;
         // This is all old stuff from releasing modals when Kanye reaches eiffel tower -
         // it's not necessary anymore, but I kept it in for now just because some
@@ -237,9 +236,6 @@ function checkEiffel() {
 function checkMoulin() {
     if (at_stop (MOULIN, x, y)) {
         window.location.replace("moulinrouge.html");
-
-        setMoulin(true);
-        setDirect(destEnum.LOUVRE);
         counter_pause = true;
     }
 }
@@ -247,8 +243,6 @@ function checkMoulin() {
 function checkLouvre() {
     if (at_stop (LOUVRE, x, y)) {
         window.location.replace("louvre.html");
-        setLouvre(true);
-        setDirect(destEnum.HOTEL);
         counter_pause = true;
     }
 }
