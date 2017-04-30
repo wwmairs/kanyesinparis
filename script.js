@@ -5,8 +5,10 @@ var startY = 44;
 
 // TODO: someone who knows jokes about kanye
 // west should write better directions
-var directions = ["Allez a la Tour Eiffel!!", "Allez au Moulin Rouge!",
-                  "Cherchez au Louvre!", "Rentrez a l'hotel!"];
+var directions = ["Go to the Eiffel Tower!", 
+                  "Go to the Moulin Rouge!",
+                  "Go to the Louvre!", 
+                  "Go back to the Hotel!"];
 var destEnum = {
     EIFFEL : 0,
     MOULIN : 1,
@@ -18,17 +20,23 @@ var destEnum = {
    format: [left x bound, right x bound, top y bound, bottom y bound] */
 // THESE ARE ALL RATIOS NOW, of x coord / WID and y coord / HIG
 EIFFEL = [.117, .232, .656, .760];
-
 MOULIN = [.460, .535, .085, .160];
 LOUVRE = [.876, .964, .360, .444];
 HOTEL  = [.254, .330, .870, .998];
 
-// Starting values
-x = startX;
-y = startY;
-// setting start X, Y coords, eiffle, louvre, moulin, directions
+
+// setting start X, Y coords, eiffel, louvre, moulin, directions
+// only initializes if a game is not currently in progress
 initializeSessionData();
 showDirections();
+
+// Starting values
+// TODO: for some reason, doing this makes robocop think Kanye has
+// left paris when the game page loads after arriving at a destination
+// x = getX();
+// y = getY();
+x = startX;
+y = startY;
 
 speed = 1;
 angle = 45;
@@ -102,7 +110,8 @@ function rgbToHex(r, g, b) {
 }
 
 function at_stop (location, x1, y1) {
-    if ((x1/WID >= location[0]) && (x1/WID <= location[1]) && (y1/HIG >= location[2]) && (y1/HIG <= location[3])) {
+    if ((x1/WID >= location[0]) && (x1/WID <= location[1]) && 
+        (y1/HIG >= location[2]) && (y1/HIG <= location[3])) {
         return true;
     } else {
         return false;
@@ -173,7 +182,6 @@ function checkDestinations() {
     // if (! getMoulin()) {checkMoulin();}
     // if (! getLouvre()) {checkLouvre();}
     // if (! getHotel())  {checkHotel();}
-    // TODO: Work out why only checkEiffel works
     // TODO: figure out how to query the bool too
     // for some reason trying to && with ! getEiffel
     // or && with (getEiffel() == false) breaks it
@@ -183,7 +191,16 @@ function checkDestinations() {
     checkHotel();
 
 }
-
+// TODO: these currently update the session storage, indicating that
+// the player has visited the location and prompts the next direction
+// right away, and doesn't even check that the player is going to the
+// right locations in the right order.
+// WHAT IT NEEDS TO DO
+// - make sure that the player is going in the correct order
+// - only update a location as 'visited' (i.e. setEiffel(true)) if the
+//   player answers the question correctly
+// - update the startX and startY locations so that the player starts from
+//   the last location they answered a question correctly at
 function checkEiffel() {
     if (at_stop(EIFFEL, x, y)) {
         window.location.replace("eiffel.html");
