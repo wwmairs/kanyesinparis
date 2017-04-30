@@ -3,7 +3,7 @@
 var startX = 51;
 var startY = 44;
 
-// TODO: someone who knows jokes about kanye 
+// TODO: someone who knows jokes about kanye
 // west should write better directions
 var directions = ["Allez à la Tour Eiffel!!", "Allez au Moulin Rouge!",
                   "Cherchez au Louvre!", "Rentrez à l'hotel!"];
@@ -109,7 +109,7 @@ function at_stop (location, x1, y1) {
 
 // Main draw loop
 function draw() {
-    
+
     checkDestinations();
 
     context = canvas.getContext("2d");
@@ -274,7 +274,7 @@ function showDirections() {
 ///////////////////////////////////////////////////////////
 
 
-// Checking that Kanye is on road, displays modal, 
+// Checking that Kanye is on road, displays modal,
 // changes time, resets x y coords
 ///////////////////////////////////////////////////////////
 function offRoading() {
@@ -282,11 +282,10 @@ function offRoading() {
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     // console.log('hex values:');
     // console.log(hex);
-    var offroadvals = ["#51c45c", "#0f33ce", 
-                       "#51c45c", "#0f33ce", 
+    var offroadvals = ["#51c45c", "#0f33ce",
+                       "#51c45c", "#0f33ce",
                        "#00d558", "#3e00d3"];
     if (offroadvals.indexOf(hex) != -1) {
-        console.log('Kanyes is offroading!');
         var modal = document.getElementById('off_road');
         modal.style.display = "block";
         counter_pause = true;
