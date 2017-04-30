@@ -31,18 +31,15 @@ initializeSessionData();
 showDirections();
 
 // Starting values
-// TODO: for some reason, doing this makes robocop think Kanye has
-// left paris when the game page loads after arriving at a destination
-// x = getX();
-// y = getY();
-x = startX;
-y = startY;
+x = getX();
+y = getY();
 
 speed = 1;
 angle = 45;
 mod = 0;
 limit = 5;
-counter_pause = false;
+// Game starts paused; unpauses when player clicks directions modal
+counter_pause = true;
 /* TODO:
     - Modals for: success, broken rules, start and finish
     - store past scores of each user (and overall high score)
@@ -75,21 +72,11 @@ context = canvas.getContext("2d");
 canvas.width = WID - 20;
 canvas.height = HIG - 20;
 
-// Create and get images for canvas elements
-car = new Image();
-car.crossOrigin = "Anonymous";
-car.src = "https://dl.dropboxusercontent.com/s/n66p9bussx82uo7/kanyecar.png?dl=0";
-
-map = new Image();
-map.crossOrigin = "Anonymous";
-map.src = "https://dl.dropboxusercontent.com/s/8ovyemcx0z8mzvx/boardmap.jpg?dl=0";
+loadImages();
 
 
-
-
-window.addEventListener("keydown", keypress_handler, false);
-
-// prevents arrow keys from scrolling page, so they can be used for controlling kanye
+// prevents arrow keys from scrolling page, so they can be used 
+// for controlling kanye
 window.addEventListener("keydown", function(e) {
     // space and arrow keys
     if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
@@ -195,11 +182,10 @@ function checkDestinations() {
     }
 
 }
-// TODO:
-// - update the startX and startY locations so that the player starts from
-//   the last location they answered a question correctly at
 function checkEiffel() {
     if (at_stop(EIFFEL, x, y)) {
+        setX(x);
+        setY(y);
         window.location.replace("eiffel.html");
         counter_pause = true;
     }
@@ -207,6 +193,8 @@ function checkEiffel() {
 
 function checkMoulin() {
     if (at_stop (MOULIN, x, y)) {
+        setX(x);
+        setY(y);
         window.location.replace("moulinrouge.html");
         counter_pause = true;
     }
@@ -214,6 +202,8 @@ function checkMoulin() {
 
 function checkLouvre() {
     if (at_stop (LOUVRE, x, y)) {
+        setX(x);
+        setY(y);
         window.location.replace("louvre.html");
         counter_pause = true;
     }
@@ -238,6 +228,8 @@ function showDirections() {
         counter_pause = true;
         window.onclick = function(event) {
             modal.style.display = "none";
+            // player can only move once directions are gone
+            window.addEventListener("keydown", keypress_handler, false);
             counter_pause = false;
         }
 }
@@ -260,8 +252,8 @@ function offRoading() {
         var modal = document.getElementById('off_road');
         modal.style.display = "block";
         counter_pause = true;
-        x = startX;
-        y = startY;
+        x = getX();
+        y = getY();
         counter -= 5;
         mod = 0;
         angle = 45;
@@ -295,8 +287,8 @@ function leftParis() {
         var modal = document.getElementById('left_paris');
         modal.style.display = "block";
         counter_pause = true;
-        x = startX;
-        y = startY;
+        x = getX();
+        y = getY();
         angle = 45;
         mod = 0;
         window.onclick = function(event) {
@@ -323,6 +315,19 @@ function keypress_handler(event) {
     }
 }
 
+// Loading car and map images
+///////////////////////////////////////////////////////////
+function loadImages() {
+    // Create and get images for canvas elements
+    car = new Image();
+    car.crossOrigin = "Anonymous";
+    car.src = "https://dl.dropboxusercontent.com/s/n66p9bussx82uo7/kanyecar.png?dl=0";
+
+    map = new Image();
+    map.crossOrigin = "Anonymous";
+    map.src = "https://dl.dropboxusercontent.com/s/8ovyemcx0z8mzvx/boardmap.jpg?dl=0";
+}
+
 
 ///////////////////////////////////////////////////////////
 ///// HELPER FUNCTIONS for session data               /////
@@ -343,9 +348,9 @@ function initializeSessionData () {
 
 // getters and setters
 ///////////////////////////////////////////////////////////
-function getX () {return sessionStorage.getItem('x');}
+function getX () {return parseFloat(sessionStorage.getItem('x'));}
 
-function getY () {return sessionStorage.getItem('y');}
+function getY () {return parseFloat(sessionStorage.getItem('y'));}
 
 function getEiffel () {return sessionStorage.getItem('eiffel');}
 
