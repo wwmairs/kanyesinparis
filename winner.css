@@ -24,6 +24,20 @@ body{
 	text-transform: uppercase;
 	color: red;
 	position: absolute;
+	margin-left: 20%;
+	margin-top: 62%;
+}
+
+#app_store{
+	padding:15px 25px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 2vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
 	margin-left: 40%;
 	margin-top: 62%;
 }

@@ -13,11 +13,6 @@
 /*
     - store past scores of each user (and overall high score)
     - data reporting at the end of the game
-    - someone with better Kanye-related joke writing abilities
-      should come up with some clever directions for the DIRECTIONS
-      array (~line 25)
-    - MAKE KANYE STAY ON THE ROAD
-      he can still drive wherever he pleases
 */
 
 // General notes
