@@ -51,6 +51,23 @@ body {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+/* direction style */
+#destination{
+    margin: auto;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    text-align: center;
+    color: white;
+    font-family: Impact;
+    font-size: 52px;
+    letter-spacing: 4px;
+}
+
+
 /* too fast popup styles */
 #too_fast{
     margin: auto;

@@ -5,9 +5,9 @@ var startY = 44;
 
 // TODO: someone who knows jokes about kanye
 // west should write better directions
-var directions = ["Allez à la Tour Eiffel!!", "Allez au Moulin Rouge!",
-                  "Cherchez au Louvre!", "Rentrez à l'hotel!"];
-var destination = {
+var directions = ["Allez a la Tour Eiffel!!", "Allez au Moulin Rouge!",
+                  "Cherchez au Louvre!", "Rentrez a l'hotel!"];
+var destEnum = {
     EIFFEL : 0,
     MOULIN : 1,
     LOUVRE : 2,
@@ -16,10 +16,12 @@ var destination = {
 
 /* boundaries for in_box and at_stop functions
    format: [left x bound, right x bound, top y bound, bottom y bound] */
-EIFFEL = [190, 305, 539, 585];
-MOULIN = [740, 800, 0, 150];
-LOUVRE = [1370, 1510, 370, 250];
-HOTEL  = [400, 450, 730, 775];
+// THESE ARE ALL RATIOS NOW, of x coord / WID and y coord / HIG
+EIFFEL = [.117, .232, .656, .760];
+
+MOULIN = [.460, .535, .085, .160];
+LOUVRE = [.876, .964, .360, .444];
+HOTEL  = [.254, .330, .870, .998];
 
 // Starting values
 x = startX;
@@ -100,7 +102,9 @@ function rgbToHex(r, g, b) {
 }
 
 function at_stop (location, x1, y1) {
-    if ((x1 >= location[0]) && (x1 <= location[1]) && (y1 >= location[2]) && (y1 <= location[3])) {
+    console.log("car is currently at " + x1/WID + " ," + y1/HIG);
+    console.log("EIFFEL is (" + EIFFEL[0] + " < " + EIFFEL[1] + "), (" + EIFFEL[2] + " < " + EIFFEL[3] + ")");
+    if ((x1/WID >= location[0]) && (x1/WID <= location[1]) && (y1/HIG >= location[2]) && (y1/HIG <= location[3])) {
         return true;
     } else {
         return false;
@@ -200,7 +204,7 @@ function checkEiffel() {
         window.location.replace("eiffel.html");
 
         setEiffel(true);
-        setDirect(directions[destinations.MOULIN]);
+        setDirect(destEnum.MOULIN);
         counter_pause = true;
         // This is all old stuff from releasing modals when Kanye reaches eiffel tower -
         // it's not necessary anymore, but I kept it in for now just because some
@@ -230,9 +234,10 @@ function checkEiffel() {
 
 function checkMoulin() {
     if (at_stop (MOULIN, x, y)) {
-        window.location.replace("moulin.html");
+        window.location.replace("moulinrouge.html");
 
         setMoulin(true);
+        setDirect(destEnum.LOUVRE);
         counter_pause = true;
     }
 }
@@ -241,13 +246,14 @@ function checkLouvre() {
     if (at_stop (LOUVRE, x, y)) {
         window.location.replace("louvre.html");
         setLouvre(true);
+        setDirect(destEnum.HOTEL);
         counter_pause = true;
     }
 }
 
 function checkHotel() {
     if (at_stop (HOTEL, x, y)) {
-        window.location.replace("hotel.html");
+        window.location.replace("winner.html");
 
         setHotel(true);
         counter_pause = true;
@@ -260,7 +266,8 @@ function checkHotel() {
 function showDirections() {
 
     var modal = document.getElementById('destination');
-        document.getElementById("direction").innerHTML = getDirect();
+        document.getElementById("direction").innerHTML 
+                = directions[getDirect()];
         modal.style.display = "block";
         counter_pause = true;
         window.onclick = function(event) {
@@ -338,14 +345,19 @@ function leftParis() {
 ///// HELPER FUNCTIONS for session data               /////
 ///////////////////////////////////////////////////////////
 function initializeSessionData () {
-    sessionStorage.setItem('x', startX);
-    sessionStorage.setItem('y', startY);
-    sessionStorage.setItem('eiffel', false);
-    sessionStorage.setItem('louvre', false);
-    sessionStorage.setItem('moulin', false);
-    sessionStorage.setItem('hotel',  false);
-    sessionStorage.setItem('direct', directions[destination.EIFFEL]);
-    sessionStorage.setItem('counter', 45);
+    if (sessionStorage.getItem('gameStarted') == null) {
+        console.log('initializing session data');
+        console.log('this should only happen once');
+        sessionStorage.setItem('gameStarted', true);
+        sessionStorage.setItem('x', startX);
+        sessionStorage.setItem('y', startY);
+        sessionStorage.setItem('eiffel', false);
+        sessionStorage.setItem('louvre', false);
+        sessionStorage.setItem('moulin', false);
+        sessionStorage.setItem('hotel',  false);
+        sessionStorage.setItem('direct', destEnum.EIFFEL);
+        sessionStorage.setItem('counter', 45);
+    }
 }
 
 // getters and setters
