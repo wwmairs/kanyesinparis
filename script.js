@@ -102,8 +102,6 @@ function rgbToHex(r, g, b) {
 }
 
 function at_stop (location, x1, y1) {
-    console.log("car is currently at " + x1/WID + " ," + y1/HIG);
-    console.log("EIFFEL is (" + EIFFEL[0] + " < " + EIFFEL[1] + "), (" + EIFFEL[2] + " < " + EIFFEL[3] + ")");
     if ((x1/WID >= location[0]) && (x1/WID <= location[1]) && (y1/HIG >= location[2]) && (y1/HIG <= location[3])) {
         return true;
     } else {
@@ -164,20 +162,7 @@ function draw() {
 }
 
 
-function keypress_handler(event) {
-    if (event.keyCode == 38) { // up arrow
-        mod += 1; // speeds up every time you press up
-    }
-    if (event.keyCode == 40) { // down arrow
-        mod -= 1; // slows down every time you press down
-    }
-    if (event.keyCode == 37) { // left arrow
-        angle -= 10;
-    }
-    if (event.keyCode == 39) { // right arrow
-        angle += 10;
-    }
-}
+
 ///////////////////////////////////////////////////////////
 ///// Funcitons for checking if at destinations       /////
 ///////////////////////////////////////////////////////////
@@ -340,6 +325,23 @@ function leftParis() {
     }
 }
 
+// Using arrow-key input to move Kanye
+///////////////////////////////////////////////////////////
+function keypress_handler(event) {
+    if (event.keyCode == 38) { // up arrow
+        mod += 1; // speeds up every time you press up
+    }
+    if (event.keyCode == 40) { // down arrow
+        mod -= 1; // slows down every time you press down
+    }
+    if (event.keyCode == 37) { // left arrow
+        angle -= 10;
+    }
+    if (event.keyCode == 39) { // right arrow
+        angle += 10;
+    }
+}
+
 
 ///////////////////////////////////////////////////////////
 ///// HELPER FUNCTIONS for session data               /////
@@ -392,4 +394,5 @@ function setHotel (newHotel) {sessionStorage.setItem('hotel', newHotel);}
 
 function setDirect (newDirect) {sessionStorage.setItem('direct', newDirect);}
 
-function setCounter (newCounter) {sessionStorage.setItem('counter', newCounter);}
+function setCounter (newCounter) 
+                            {sessionStorage.setItem('counter', newCounter);}
