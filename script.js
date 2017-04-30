@@ -280,8 +280,6 @@ function showDirections() {
 function offRoading() {
     var color = context.getImageData(x, y, 1, 1).data;
     var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    // console.log('hex values:');
-    // console.log(hex);
     var offroadvals = ["#51c45c", "#0f33ce",
                        "#51c45c", "#0f33ce",
                        "#00d558", "#3e00d3"];
@@ -347,6 +345,7 @@ function initializeSessionData () {
     sessionStorage.setItem('moulin', false);
     sessionStorage.setItem('hotel',  false);
     sessionStorage.setItem('direct', directions[destination.EIFFEL]);
+    sessionStorage.setItem('counter', 45);
 }
 
 // getters and setters
@@ -365,6 +364,8 @@ function getHotel () {return sessionStorage.getItem('hotel');}
 
 function getDirect () {return sessionStorage.getItem('direct');}
 
+function getCounter () {return sessionStorage.getItem('counter');}
+
 function setX (newX) {sessionStorage.setItem('x', newX);}
 
 function setY (newY) {sessionStorage.setItem('y', newY);}
@@ -378,3 +379,5 @@ function setMoulin (newMoulin) {sessionStorage.setItem('moulin', newMoulin);}
 function setHotel (newHotel) {sessionStorage.setItem('hotel', newHotel);}
 
 function setDirect (newDirect) {sessionStorage.setItem('direct', newDirect);}
+
+function setCounter (newCounter) {sessionStorage.setItem('counter', newCounter);}
