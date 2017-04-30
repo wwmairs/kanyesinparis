@@ -12,8 +12,8 @@
 // General TODOs
 /*
     - store past scores of each user (and overall high score)
-    - data reporting at the end of the game 
-    - someone with better Kanye-related joke writing abilities 
+    - data reporting at the end of the game
+    - someone with better Kanye-related joke writing abilities
       should come up with some clever directions for the DIRECTIONS
       array (~line 25)
     - MAKE KANYE STAY ON THE ROAD
@@ -21,7 +21,7 @@
 */
 
 // General notes
-/* 
+/*
     - something WILD: sessionStorage seems to convert boolean
       values false and true into string "false" and "true"
       what a weird language feature
@@ -32,15 +32,15 @@
 const START_X = 51;
 const START_Y = 44;
 const destEnum = {EIFFEL : 0, MOULIN : 1, LOUVRE : 2, HOTEL  : 3};
-const DIRECTIONS = ["Go to the Eiffel Tower!", 
+const DIRECTIONS = ["Go to the Eiffel Tower!",
                     "Go to the Moulin Rouge!",
-                    "Go to the Louvre!", 
+                    "Go to the Louvre!",
                     "Go back to the Hotel!"];
 // Boundaries for in_box and at_stop functions
 // [left x bound, right x bound, top y bound, bottom y bound]
 // THESE ARE ALL RATIOS NOW, of x coord / WID and y coord / HIG
 const EIFFEL = [.117, .232, .656, .760];
-const MOULIN = [.460, .535, .085, .160];
+const MOULIN = [.460, .535, .085, .170];
 const LOUVRE = [.876, .964, .360, .444];
 const HOTEL  = [.254, .330, .870, .998];
 
@@ -90,7 +90,7 @@ canvas.height = HIG - 20;
 // load car and map images
 loadImages();
 
-// prevents arrow keys from scrolling page, so they can be used 
+// prevents arrow keys from scrolling page, so they can be used
 // for controlling kanye
 window.addEventListener("keydown", function(e) {
     // space and arrow keys
@@ -165,10 +165,10 @@ function draw() {
 function checkDestinations() {
     if (getEiffel() == "false"){
         checkEiffel();
-    } 
+    }
     if (getEiffel() == "true" && getMoulin() == "false") {
         checkMoulin();
-    } 
+    }
     if (getEiffel() == "true" && getMoulin() == "true" &&
         getLouvre() == "false") {
         checkLouvre();
@@ -213,11 +213,11 @@ function checkHotel() {
     }
 }
 
-// Returns true if x1 and y1 are within the block 
+// Returns true if x1 and y1 are within the block
 // represented by location
 ///////////////////////////////////////////////////////////
 function at_stop (location, x1, y1) {
-    if ((x1/WID >= location[0]) && (x1/WID <= location[1]) && 
+    if ((x1/WID >= location[0]) && (x1/WID <= location[1]) &&
         (y1/HIG >= location[2]) && (y1/HIG <= location[3])) {
         return true;
     } else {
@@ -230,16 +230,43 @@ function at_stop (location, x1, y1) {
 ///////////////////////////////////////////////////////////
 function showDirections() {
 
-    var modal = document.getElementById('destination');
-        document.getElementById("direction").innerHTML 
-                = DIRECTIONS[getDirect()];
-        modal.style.display = "block";
-        counter_pause = true;
-        window.onclick = function(event) {
-            modal.style.display = "none";
-            // player can only move once directions are gone
-            window.addEventListener("keydown", keypress_handler, false);
-            counter_pause = false;
+    var whichModal = getDirect();
+    switch (whichModal) {
+        case "0": break;
+        case "1":
+            whichModal = 'eiffel_success';
+            break;
+        case "2":
+            whichModal = 'rouge_success';
+            break;
+        case "3":
+            whichModal = "lourve_success";
+            break;
+        default: // do nothing
+    }
+
+    if (whichModal != "0") {
+        var modal = document.getElementById(whichModal);
+            modal.style.display = "block";
+            counter_pause = true;
+            window.onclick = function(event) {
+                modal.style.display = "none";
+                // player can only move once directions are gone
+                window.addEventListener("keydown", keypress_handler, false);
+                counter_pause = false;
+            }
+        } else {
+            var modal = document.getElementById("destination");
+                    document.getElementById("direction").innerHTML
+                            = DIRECTIONS[getDirect()];
+                modal.style.display = "block";
+                counter_pause = true;
+                window.onclick = function(event) {
+                    modal.style.display = "none";
+                    // player can only move once directions are gone
+                    window.addEventListener("keydown", keypress_handler, false);
+                    counter_pause = false;
+                }
         }
 }
 
@@ -395,7 +422,7 @@ function setHotel (newHotel) {sessionStorage.setItem('hotel', newHotel);}
 
 function setDirect (newDirect) {sessionStorage.setItem('direct', newDirect);}
 
-function setCounter (newCounter) 
+function setCounter (newCounter)
                             {sessionStorage.setItem('counter', newCounter);}
 
 
