@@ -72,7 +72,7 @@ var interval = setInterval(function() {
     if (counter <= 0) {
         clearInterval(interval);
         /* commented this out for testing */
-        //window.location.replace("loser.html");
+        window.location.replace("loser.html");
     }
 }, 1000);
 
@@ -388,7 +388,7 @@ function initializeSessionData () {
         sessionStorage.setItem('moulin', false);
         sessionStorage.setItem('hotel',  false);
         sessionStorage.setItem('direct', destEnum.EIFFEL);
-        sessionStorage.setItem('counter', 45);
+        sessionStorage.setItem('counter', 60);
     }
 }
 
