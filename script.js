@@ -175,61 +175,33 @@ function draw() {
 ///////////////////////////////////////////////////////////
 ///// Funcitons for checking if at destinations       /////
 ///////////////////////////////////////////////////////////
+// something WILD: sessionStorage seems to convert boolean
+// values false and true into string "false" and "true"
+// what a weird language feature
 function checkDestinations() {
-    // for some reason this doesn't work, but it should, and
-    // would be pretty helpful
-    // if (!getEiffel()) {checkEiffel();}
-    // if (! getMoulin()) {checkMoulin();}
-    // if (! getLouvre()) {checkLouvre();}
-    // if (! getHotel())  {checkHotel();}
-    // TODO: figure out how to query the bool too
-    // for some reason trying to && with ! getEiffel
-    // or && with (getEiffel() == false) breaks it
-    checkEiffel();
-    checkMoulin();
-    checkLouvre();
+    if (getEiffel() == "false"){
+        checkEiffel();
+    } 
+    if (getEiffel() == "true" && getMoulin() == "false") {
+        checkMoulin();
+    } 
+    if (getEiffel() == "true" && getMoulin() == "true" &&
+        getLouvre() == "false") {
+        checkLouvre();
+    }
+    if (getEiffel() == "true" && getMoulin() == "true" &&
+        getLouvre() == "true") {
     checkHotel();
+    }
 
 }
-// TODO: these currently update the session storage, indicating that
-// the player has visited the location and prompts the next direction
-// right away, and doesn't even check that the player is going to the
-// right locations in the right order.
-// WHAT IT NEEDS TO DO
-// - make sure that the player is going in the correct order
-// - only update a location as 'visited' (i.e. setEiffel(true)) if the
-//   player answers the question correctly
+// TODO:
 // - update the startX and startY locations so that the player starts from
 //   the last location they answered a question correctly at
 function checkEiffel() {
     if (at_stop(EIFFEL, x, y)) {
         window.location.replace("eiffel.html");
-
-        setEiffel(true);
         counter_pause = true;
-        // This is all old stuff from releasing modals when Kanye reaches eiffel tower -
-        // it's not necessary anymore, but I kept it in for now just because some
-        // functions might be reusable
-    /*        var modal = document.getElementById('eiffelModal');
-            modal.style.display = "block";
-            mod = 0;
-            // I'm worried that this replacement of Kanye doesn't work on small screens
-            setX(354);
-            setY(598);
-            angle = 15;
-           function MousePos(event) {
-            tempx = event.clientX;
-            tempy = event.clientY;
-            if (in_box (JAYZ, tempx, tempy)) {
-                window.location.replace("loser.html");
-            } else if (in_box (SWIFT, tempx, tempy)) {
-                window.location.replace("loser.html");
-            } else if (in_box (BEY, tempx, tempy)) {
-                modal.style.display = "none";
-                counter_pause = false;
-            }
-        }
-        modal.addEventListener("click", MousePos); */
     }
 }
 
@@ -250,8 +222,6 @@ function checkLouvre() {
 function checkHotel() {
     if (at_stop (HOTEL, x, y)) {
         window.location.replace("winner.html");
-
-        setHotel(true);
         counter_pause = true;
     }
 }
@@ -359,8 +329,6 @@ function keypress_handler(event) {
 ///////////////////////////////////////////////////////////
 function initializeSessionData () {
     if (sessionStorage.getItem('gameStarted') == null) {
-        console.log('initializing session data');
-        console.log('this should only happen once');
         sessionStorage.setItem('gameStarted', true);
         sessionStorage.setItem('x', startX);
         sessionStorage.setItem('y', startY);
@@ -407,3 +375,29 @@ function setDirect (newDirect) {sessionStorage.setItem('direct', newDirect);}
 
 function setCounter (newCounter) 
                             {sessionStorage.setItem('counter', newCounter);}
+
+
+// Hey Adam, I moved this stuff down here
+// This is all old stuff from releasing modals when Kanye reaches eiffel tower -
+// it's not necessary anymore, but I kept it in for now just because some
+// functions might be reusable
+/*        var modal = document.getElementById('eiffelModal');
+modal.style.display = "block";
+mod = 0;
+// I'm worried that this replacement of Kanye doesn't work on small screens
+setX(354);
+setY(598);
+angle = 15;
+function MousePos(event) {
+tempx = event.clientX;
+tempy = event.clientY;
+if (in_box (JAYZ, tempx, tempy)) {
+window.location.replace("loser.html");
+} else if (in_box (SWIFT, tempx, tempy)) {
+window.location.replace("loser.html");
+} else if (in_box (BEY, tempx, tempy)) {
+modal.style.display = "none";
+counter_pause = false;
+}
+}
+modal.addEventListener("click", MousePos); */
