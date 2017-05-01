@@ -71,7 +71,6 @@ var interval = setInterval(function() {
     }
     if (counter <= 0) {
         clearInterval(interval);
-        /* commented this out for testing */
         window.location.replace("loser.html");
     }
 }, 1000);
@@ -123,7 +122,6 @@ function draw() {
     if (mod < 0) {
         displayspeed *= -1;
     }
-    //context.drawImage(spedometer, (8.5 * (WID/10)), (HIG/20));
     context.font = "60px Impact";
     if (displayspeed <= (limit * 0.7)) {
         context.fillStyle = "black";
@@ -294,11 +292,6 @@ function offRoading() {
     var color = context.getImageData(x, y, 1, 1).data;
     var distgreen = colorDistance(81, 196, 92, color[0], color[1], color[2]);
     var distblue  = colorDistance(15, 51, 206, color[0], color[1], color[2]);
-    /*var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
-    var offroadvals = ["#51c45c", "#0f33ce",
-                       "#56c261", "#153bcb",
-                       "#00d558", "#3e00d3"];
-    console.log(hex);*/
     if ((distblue <= 150) || (distgreen <= 150)) {
         console.log(distblue + " " + distgreen);
         var modal = document.getElementById('off_road');
@@ -402,7 +395,7 @@ function initializeSessionData () {
         sessionStorage.setItem('moulin', false);
         sessionStorage.setItem('hotel',  false);
         sessionStorage.setItem('direct', destEnum.EIFFEL);
-        sessionStorage.setItem('counter', 60);
+        sessionStorage.setItem('counter', 100);
     }
 }
 
@@ -440,29 +433,3 @@ function setDirect (newDirect) {sessionStorage.setItem('direct', newDirect);}
 
 function setCounter (newCounter)
                             {sessionStorage.setItem('counter', newCounter);}
-
-
-// Hey Adam, I moved this stuff down here
-// This is all old stuff from releasing modals when Kanye reaches eiffel tower -
-// it's not necessary anymore, but I kept it in for now just because some
-// functions might be reusable
-/*        var modal = document.getElementById('eiffelModal');
-modal.style.display = "block";
-mod = 0;
-// I'm worried that this replacement of Kanye doesn't work on small screens
-setX(354);
-setY(598);
-angle = 15;
-function MousePos(event) {
-tempx = event.clientX;
-tempy = event.clientY;
-if (in_box (JAYZ, tempx, tempy)) {
-window.location.replace("loser.html");
-} else if (in_box (SWIFT, tempx, tempy)) {
-window.location.replace("loser.html");
-} else if (in_box (BEY, tempx, tempy)) {
-modal.style.display = "none";
-counter_pause = false;
-}
-}
-modal.addEventListener("click", MousePos); */
