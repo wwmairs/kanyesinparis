@@ -1,0 +1,43 @@
+body{
+  background-image: url('homepage.jpg');
+  background-repeat:no-repeat;
+  background-size: 100%;
+}
+
+.highscores{
+  position: absolute;
+  margin-left: 40%;
+  margin-top: 20%;
+  margin-right:5%;
+  font-family: helvetica;
+  color: royalblue;
+  font-size: 1.7vw;
+}
+
+.highscores{
+  text-align: center;
+}
+
+.button{
+  position: absolute;
+  padding: 32px 40px;
+  margin-left: 55%;
+  margin-top: 50%;
+  background-color: royalblue;
+  font-family: helvetica;
+  font-size: 3vw;
+  text-align:center;
+  font-weight:bold;
+  text-transform: uppercase;
+  color: red;
+}
+
+a:link{
+  text-decoration: none;
+  color:red;
+}
+a:visited{
+  text-decoration: none;
+  color:white;
+}
+

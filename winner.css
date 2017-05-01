@@ -5,6 +5,26 @@ body{
 	width: 100%;
 }
 
+form{
+	padding:15px 25px;
+	padding-right:7px;
+	background-color: royalblue;
+	font-family: helvetica;
+	font-size: 1.5vw;
+	text-align:center;
+	font-weight:bold;
+	text-transform: uppercase;
+	color: red;
+	position: absolute;
+	margin-left: 57%;
+	margin-top: 62%;
+	height:20px;
+}
+
+input{
+	display: inline-block;
+}
+
 #won{
 	position: absolute;
 	margin-left: 26%;
@@ -18,26 +38,28 @@ body{
 	padding:15px 25px;
 	background-color: royalblue;
 	font-family: helvetica;
-	font-size: 2vw;
+	font-size: 1.5vw;
 	text-align:center;
 	font-weight:bold;
 	text-transform: uppercase;
 	color: red;
 	position: absolute;
-	margin-left: 20%;
+	margin-left: 6%;
 	margin-top: 62%;
+	height:20px;
 }
 
 #app_store{
 	padding:15px 25px;
 	background-color: royalblue;
 	font-family: helvetica;
-	font-size: 2vw;
+	font-size: 1.5vw;
 	text-align:center;
 	font-weight:bold;
 	text-transform: uppercase;
 	color: red;
 	position: absolute;
-	margin-left: 40%;
+	margin-left: 23%;
 	margin-top: 62%;
+	height:20px;
 }
