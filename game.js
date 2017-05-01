@@ -275,18 +275,32 @@ function showDirections() {
 ///// HELPER FUNCTIONS for draw() loop                /////
 ///////////////////////////////////////////////////////////
 
+function colorDistance(colorRed,colorGreen,colorBlue,pixelRed,pixelGreen,pixelBlue){
+
+    var diffR,diffG,diffB;
+
+    diffR=( colorRed - pixelRed );
+    diffG=( colorGreen - pixelGreen );
+    diffB=( colorBlue - pixelBlue );
+    dist = Math.sqrt(diffR*diffR + diffG*diffG + diffB*diffB);
+    return dist;
+
+}
 
 // Checking that Kanye is on road, displays modal,
 // changes time, resets x y coords
 ///////////////////////////////////////////////////////////
 function offRoading() {
     var color = context.getImageData(x, y, 1, 1).data;
-    var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
+    var distgreen = colorDistance(81, 196, 92, color[0], color[1], color[2]);
+    var distblue  = colorDistance(15, 51, 206, color[0], color[1], color[2]);
+    /*var hex = "#" + ("000000" + rgbToHex(color[0], color[1], color[2])).slice(-6);
     var offroadvals = ["#51c45c", "#0f33ce",
-                       "#51c45c", "#0f33ce",
+                       "#56c261", "#153bcb",
                        "#00d558", "#3e00d3"];
-    console.log(hex);
-    if (offroadvals.indexOf(hex) != -1) {
+    console.log(hex);*/
+    if ((distblue <= 150) || (distgreen <= 150)) {
+        console.log(distblue + " " + distgreen);
         var modal = document.getElementById('off_road');
         modal.style.display = "block";
         counter_pause = true;
