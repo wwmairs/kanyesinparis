@@ -17,6 +17,11 @@ function setupHighscores() {
     localStorage.setItem('highscores', stringJson);
   }
 }
+//////Get user data from URL and sessionstorage
+///////////////////////////////////////////////////////////
+function userData(){
+	storeName(getURLParameter("firstname"), getStoredScore());
+}
 
 ///// Helper function to store a new name and score
 ///////////////////////////////////////////////////////////
@@ -45,6 +50,14 @@ function getScores() {
   var stringJson = localStorage.getItem('highscores');
   var object = JSON.parse(stringJson);
   return object;
+}
+
+///// Get Score from Session Storage
+//////////////////////////////////////////////////////////
+function getStoredScore () {
+	var scorestring = sessionStorage.getItem('score');
+	var scoreint = parseInt(scorestring, 10);
+	return scoreint;
 }
 
 ///// from 
