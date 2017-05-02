@@ -65,12 +65,28 @@ was stored using local storage, so that the user can close the browser, load the
 time, and the data will still persist.
 
 2. CORS and using someone else's server:
-The background image and car on which Kanye drives are images, which are loaded onto an HTML camvas.
+The background image and car on which Kanye drives are images, which are loaded onto an HTML canvas.
 In order to tell whether Kanye is on the road, we needed to analyze what color the picture was at Kanye's
 current x and y coordinate. Long story short, doing that isn't so easy. Loading the image into
-HTML and just pulling the data off of it using getImageData doesn't work, because technically
+the canvas and just pulling the data off of it using getImageData doesn't work, because technically
 the image's source is from a cross-origin location, and getting data from a cross-origin location
 is a no-no! Here's how we worked around it:
 We found a CORS-friendly data hosting site (thanks to some Google searches), namely, Dropbox,
 and put all of our images on there, instead of on our own server. From there, we created links
-to access the content. 
+to access the content. Then, every time we needed to get the data of a certain pixel on
+the image, we requested to Dropbox with a parameter "crossOrigin" set to "Anonymous".
+Because of the way Dropbox accepts requests, if you make the request with this Anonymous
+cross-origin parameter, you can get your data free of CORS errors! It's magical. This took a lot
+of stackoverflow searching to find.
+
+3. The HTML canvas element:
+It's awesome! Let me break down for you exactly how it works. You set up a "canvas" element
+in your HTML file that you reference in your .js file or files. This provides you with a rectangle
+of any width and height that you specify. On that canvas, you can "draw" any image or shape you like,
+in any position you like. How, you might ask, do you animate with it? How does Kanye drive?
+The answer: a loop that re-draws everything every 30 milliseconds. In that loop, the map is
+always drawn in the same position, but the car is redrawn at updated x and y coordinates, which change
+based on the player's interaction with the arrow keys. It's a little complex once you get down into
+the specifics, but that's the basic idea.
+
+That's all there is to print! We hope you enjoy the game!
