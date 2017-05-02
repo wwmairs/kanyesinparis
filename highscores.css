@@ -4,7 +4,7 @@ body{
   background-size: 100%;
 }
 
-.highscores{
+#scores{
   position: absolute;
   margin-left: 40%;
   margin-top: 20%;

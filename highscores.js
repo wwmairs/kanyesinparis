@@ -4,6 +4,7 @@
 
 setupHighscores();
 console.log(getScores());
+addScores();
 
 
 
@@ -43,7 +44,21 @@ function sortScores(object){
 		return score1-score2
 	});
 }
-
+///// Helper function to grab top three highscores
+///// adds scores to highscores.html
+//////////////////////////////////////////////////////////
+function addScores() {
+	var data = getScores();
+	var namesArray = data.namesAndScores;
+	var i = 2;
+	if (namesArray.length < 2) {
+		i = namesArray.length;
+	}
+	for (i; i >= 0; i--) {
+		var newParagraph = "<p>" + namesArray[i].name + " : " + namesArray[i].score + "</p>";
+		document.getElementById("scores").innerHTML += newParagraph;
+	}
+}
 ///// Returns JSON object of highscores
 ///////////////////////////////////////////////////////////
 function getScores() {
