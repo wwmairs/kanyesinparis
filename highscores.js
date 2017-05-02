@@ -4,7 +4,7 @@
 
 setupHighscores();
 console.log(getScores());
-storeName('Will', 4);
+
 
 
 ///// Helper function to initialize name and score list
@@ -22,7 +22,21 @@ function setupHighscores() {
 ///////////////////////////////////////////////////////////
 function storeName(aName, aScore){
   var newEntry = {name: aName, score: aScore}
-  console.log(newEntry);
+  var data = getScores();
+  data.namesAndScores.push(newEntry);
+  sortScores(data);
+  var stringJson = JSON.stringify(data);
+  localStorage.setItem('highscores', stringJson);
+}
+
+/////Helper function to sort highscores list
+///////////////////////////////////////////////////////////
+function sortScores(object){
+	object.namesAndScores.sort(function(a, b){
+		var score1 = a.score;
+		var score2 = b.score;
+		return score1-score2
+	});
 }
 
 ///// Returns JSON object of highscores
