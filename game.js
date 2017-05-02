@@ -207,6 +207,7 @@ function checkLouvre() {
 
 function checkHotel() {
     if (at_stop (HOTEL, x, y)) {
+        sessionStorage.setItem('score', counter);
         window.location.replace("winner.html");
         counter_pause = true;
     }
