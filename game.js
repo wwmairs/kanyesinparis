@@ -34,7 +34,7 @@ const DIRECTIONS = ["Go to the Eiffel Tower!",
 // Boundaries for in_box and at_stop functions
 // [left x bound, right x bound, top y bound, bottom y bound]
 // THESE ARE ALL RATIOS NOW, of x coord / WID and y coord / HIG
-const EIFFEL = [.107, .250, .646, .770];
+const EIFFEL = [.100, .300, .600, .800];
 const MOULIN = [.450, .545, .075, .250];
 const LOUVRE = [.826, .974, .300, .454];
 const HOTEL  = [.150, .350, .700, .999];
