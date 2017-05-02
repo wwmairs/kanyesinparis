@@ -35,8 +35,8 @@ const DIRECTIONS = ["Go to the Eiffel Tower!",
 // [left x bound, right x bound, top y bound, bottom y bound]
 // THESE ARE ALL RATIOS NOW, of x coord / WID and y coord / HIG
 const EIFFEL = [.107, .250, .646, .770];
-const MOULIN = [.450, .545, .075, .180];
-const LOUVRE = [.826, .974, .350, .454];
+const MOULIN = [.450, .545, .075, .220];
+const LOUVRE = [.826, .974, .300, .454];
 const HOTEL  = [.150, .350, .700, .999];
 
 // setting start X, Y coords, eiffel, louvre, moulin, directions
@@ -216,8 +216,6 @@ function checkHotel() {
 // represented by location
 ///////////////////////////////////////////////////////////
 function at_stop (location, x1, y1) {
-    console.log(location[0] + " " + location[1] + " " + location[2] + " " + location[3]);
-    console.log(x1 + " " + y1);
     if ((x1/WID >= location[0]) && (x1/WID <= location[1]) &&
         (y1/HIG >= location[2]) && (y1/HIG <= location[3])) {
         return true;
@@ -295,7 +293,6 @@ function offRoading() {
     var distgreen = colorDistance(81, 196, 92, color[0], color[1], color[2]);
     var distblue  = colorDistance(15, 51, 206, color[0], color[1], color[2]);
     if ((distblue <= 150) || (distgreen <= 150)) {
-        console.log(distblue + " " + distgreen);
         var modal = document.getElementById('off_road');
         modal.style.display = "block";
         window.removeEventListener("keydown", keypress_handler, false);
