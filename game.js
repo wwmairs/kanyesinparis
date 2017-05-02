@@ -34,10 +34,10 @@ const DIRECTIONS = ["Go to the Eiffel Tower!",
 // Boundaries for in_box and at_stop functions
 // [left x bound, right x bound, top y bound, bottom y bound]
 // THESE ARE ALL RATIOS NOW, of x coord / WID and y coord / HIG
-const EIFFEL = [.117, .232, .656, .760];
-const MOULIN = [.460, .535, .085, .170];
-const LOUVRE = [.876, .964, .360, .444];
-const HOTEL  = [.254, .330, .870, .998];
+const EIFFEL = [.107, .250, .646, .770];
+const MOULIN = [.450, .545, .075, .180];
+const LOUVRE = [.866, .974, .350, .454];
+const HOTEL  = [.264, .340, .860, .1008];
 
 // setting start X, Y coords, eiffel, louvre, moulin, directions
 // only initializes if a game is not currently in progress
