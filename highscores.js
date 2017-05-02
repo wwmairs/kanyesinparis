@@ -2,7 +2,9 @@
 ///// Script for storing and displaying highscores    /////
 ///////////////////////////////////////////////////////////
 
-
+setupHighscores();
+console.log(getScores());
+storeName('Will', 4);
 
 
 ///// Helper function to initialize name and score list
@@ -10,7 +12,7 @@
 ///////////////////////////////////////////////////////////
 function setupHighscores() {
   if (localStorage.getItem('highscores') == null) {
-    var initialJson = { names: [], scores: [], length: 0}
+    var initialJson = { namesAndScores:[] }
     var stringJson = JSON.stringify(initialJson);
     localStorage.setItem('highscores', stringJson);
   }
@@ -19,7 +21,16 @@ function setupHighscores() {
 ///// Helper function to store a new name and score
 ///////////////////////////////////////////////////////////
 function storeName(aName, aScore){
-  // TODO: this part
+  var newEntry = {name: aName, score: aScore}
+  console.log(newEntry);
+}
+
+///// Returns JSON object of highscores
+///////////////////////////////////////////////////////////
+function getScores() {
+  var stringJson = localStorage.getItem('highscores');
+  var object = JSON.parse(stringJson);
+  return object;
 }
 
 ///// from 
