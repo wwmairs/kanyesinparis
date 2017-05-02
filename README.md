@@ -51,3 +51,26 @@ from [this song](https://www.youtube.com/watch?v=RxNdSDraYOU).
 
 # Comments by Ming
 * Total win just on the title *and* the reference to the legendary Bobby Boucher alone.
+
+## Final Notes
+Man, what a project. We had quite a fun time implementing [gorgeous](https://open.spotify.com/track/23SZWX2IaDnxmhFsSLvkG2) game, and we hope you enjoy it as much as we do!
+### Fun things we learned:
+1. Client-side data persistence:
+Since we redirect to other web pages to show Kanye's clues at each stop, we needed to store data
+inside the game about Kanye's position and the time remaining, so that when the game page reloaded,
+the player didn't start at the beginning again. We used session storage to do this, meaning
+as long as the player keeps the browser session running, all of their data will remain.
+We also had to impelemnt some way of storing each player's high scores. This information
+was stored using local storage, so that the user can close the browser, load the game at another
+time, and the data will still persist.
+
+2. CORS and using someone else's server:
+The background image and car on which Kanye drives are images, which are loaded onto an HTML camvas.
+In order to tell whether Kanye is on the road, we needed to analyze what color the picture was at Kanye's
+current x and y coordinate. Long story short, doing that isn't so easy. Loading the image into
+HTML and just pulling the data off of it using getImageData doesn't work, because technically
+the image's source is from a cross-origin location, and getting data from a cross-origin location
+is a no-no! Here's how we worked around it:
+We found a CORS-friendly data hosting site (thanks to some Google searches), namely, Dropbox,
+and put all of our images on there, instead of on our own server. From there, we created links
+to access the content. 
