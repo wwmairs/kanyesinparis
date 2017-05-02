@@ -296,6 +296,7 @@ function offRoading() {
         console.log(distblue + " " + distgreen);
         var modal = document.getElementById('off_road');
         modal.style.display = "block";
+        window.removeEventListener("keydown", keypress_handler, false);
         counter_pause = true;
         x = getX();
         y = getY();
@@ -305,6 +306,7 @@ function offRoading() {
         window.onclick = function(event) {
             modal.style.display = "none";
             counter_pause = false;
+            window.addEventListener("keydown", keypress_handler, false);
         }
     }
 }
@@ -315,12 +317,14 @@ function speeding() {
    if ((mod > limit) || (mod < (limit * -1))) {
        var modal = document.getElementById('too_fast');
        modal.style.display = "block";
+       window.removeEventListener("keydown", keypress_handler, false);
        counter_pause = true;
        counter -= 5;
        mod = 0;
        window.onclick = function(event) {
            modal.style.display = "none";
            counter_pause = false;
+           window.addEventListener("keydown", keypress_handler, false);
        }
    }
 }
@@ -331,6 +335,7 @@ function leftParis() {
     if ((x > LBOUND) || (y > HBOUND) || (x < -20) || (y < -50)){
         var modal = document.getElementById('left_paris');
         modal.style.display = "block";
+        window.removeEventListener("keydown", keypress_handler, false);
         counter_pause = true;
         x = getX();
         y = getY();
@@ -339,6 +344,7 @@ function leftParis() {
         window.onclick = function(event) {
             modal.style.display = "none";
             counter_pause = false;
+            window.addEventListener("keydown", keypress_handler, false);
         }
     }
 }

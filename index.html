@@ -1,27 +1,36 @@
+<!DOCTYPE html>
+<html>
+
 <head>
-    <link rel="stylesheet" href="style.css">
-    <script
-    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js">
-    </script>
+<title> Kanye's in Paris </title>
+<link href="home.css" rel="stylesheet" />
+<script>
+// makes sure session storage will be re-initialized
+sessionStorage.removeItem('gameStarted');
+</script>
 </head>
+
 <body>
-    <audio autoplay>
-    <source src="driveslow.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
-
-     <canvas id="canvas" width="700" height="700"></canvas>
-
-<div id="destination" class="modal">
-    <p id="direction"></p>
-    <p>(Click anywhere to begin!)</p>
+<div class="button">
+<a href="index.html">Play</a>
 </div>
-<div id="too_fast" class="modal"></div>
-<div id="left_paris" class="modal"></div>
-<div id="off_road" class="modal"></div>
-<div id="eiffel_success" class="modal"></div>
-<div id="rouge_success" class="modal"></div>
-<div id="lourve_success" class="modal"></div>
 
-<script src="game.js"></script>
+<div class="rules">
+<p> Wake up, Mr. West! Kim K., the love of your life, has been robbed at gunpoint in a Parisian hotel and it's your job to solve the crime! </p>
+
+<p>
+    Drive from point to point in the City of Love, solving the Crime of the Century, before your 100 seconds runs out!
+    But remember, Drive Slow, Homie! Parisian detectives are no good, but their traffic cops are the best around.
+    If you get arrested for going over 5 km/h, you lose time!
+</p>
+
+<p>
+    Use the arrow keys to speed up, slow down and change direction.
+    First stop: the Eiffel Tower!
+</p>
+<p>
+    Bonne chance, Monsieur Ouest!
+</p>
+</div>
+
 </body>
