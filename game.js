@@ -36,8 +36,8 @@ const DIRECTIONS = ["Go to the Eiffel Tower!",
 // THESE ARE ALL RATIOS NOW, of x coord / WID and y coord / HIG
 const EIFFEL = [.107, .250, .646, .770];
 const MOULIN = [.450, .545, .075, .180];
-const LOUVRE = [.866, .974, .350, .454];
-const HOTEL  = [.264, .340, .860, .1008];
+const LOUVRE = [.826, .974, .350, .454];
+const HOTEL  = [.150, .350, .700, .999];
 
 // setting start X, Y coords, eiffel, louvre, moulin, directions
 // only initializes if a game is not currently in progress
@@ -216,6 +216,8 @@ function checkHotel() {
 // represented by location
 ///////////////////////////////////////////////////////////
 function at_stop (location, x1, y1) {
+    console.log(location[0] + " " + location[1] + " " + location[2] + " " + location[3]);
+    console.log(x1 + " " + y1);
     if ((x1/WID >= location[0]) && (x1/WID <= location[1]) &&
         (y1/HIG >= location[2]) && (y1/HIG <= location[3])) {
         return true;
